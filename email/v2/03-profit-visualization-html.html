@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keep 100% of Your Profit - My Salon Suite Blaine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+
+        body {
+            font-family: 'Jost', Helvetica, Arial, sans-serif;
+            background-color: #FAFAFB;
+            margin: 0;
+            padding: 0;
+            color: #080001;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+        }
+
+        .top-bar {
+            background-color: #F9E3B2;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #080001;
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .header img {
+            height: 35px;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('https://www.mysalonsuite.com/wp-content/uploads/2025/12/haircut.webp');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content {
+            /* Reduced top padding (was 50px) */
+            padding: 32px 40px 40px;
+        }
+
+        .content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: #F15A29;
+            /* Removed extra top margin */
+            margin: 0 0 20px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #444444;
+        }
+
+        /* Tightened stat box (was padding: 40px) */
+        .stat-box {
+            background-color: #FAFAFB;
+            padding: 24px 20px;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 28px;
+            border: 1px solid #EEEEEE;
+            color: #080001;
+        }
+
+        .stat-box h2 {
+            font-size: 64px;
+            margin: 0;
+            color: #F15A29;
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+
+        .stat-box p {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 8px 0 0 0;
+            color: #080001;
+            font-size: 12px;
+        }
+
+        .comparison {
+            border: 1px solid #EEEEEE;
+            border-radius: 4px;
+            margin-bottom: 32px;
+        }
+
+        .comp-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .comp-row:last-child {
+            border-bottom: none;
+        }
+
+        .comp-label {
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comp-value-mss {
+            color: #F15A29;
+            font-weight: 700;
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        /* Profit calculator link */
+        .calculator-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .calculator-link a {
+            color: #F15A29;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .footer {
+            background-color: #FFFFFF;
+            padding: 40px;
+            text-align: center;
+            color: #080001;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .footer img {
+            height: 30px;
+            margin-bottom: 24px;
+        }
+
+        .footer p {
+            font-size: 11px;
+            color: #666666;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">Blaine's Premier Workspace for Independent Pros</div>
+        <div class="header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        </div>
+        <div class="hero-banner"></div>
+        <div class="content">
+            <h1>Stop Splitting Your Success.</h1>
+            <p>Hi {{name}},</p>
+            <p>The biggest obstacle to growing your beauty business isn't your talent. It's the commission split. At My
+                Salon Suite Blaine, we believe established professionals should keep what they earn.</p>
+
+            <div class="stat-box">
+                <h2>100%</h2>
+                <p>Of your profits stay with you</p>
+            </div>
+
+            <div class="comparison">
+                <div class="comp-row">
+                    <span class="comp-label">Service Revenue</span>
+                    <span class="comp-value-mss">You Keep 100%</span>
+                </div>
+                <div class="comp-row">
+                    <span class="comp-label">Product Retail</span>
+                    <span class="comp-value-mss">You Keep 100%</span>
+                </div>
+                <div class="comp-row">
+                    <span class="comp-label">Business Control</span>
+                    <span class="comp-value-mss">Total Ownership</span>
+                </div>
+            </div>
+
+            <p>It's time to graduate from booth rental and open-floor drama. Step into a private, luxury environment
+                designed to elevate your brand and your bank account simultaneously.</p>
+
+            <div class="btn-wrapper">
+                <a href="https://mysalonsuiteblaine.com/#book-tour" class="btn">Find Your Perfect Suite</a>
+            </div>
+
+            <p class="calculator-link">
+                Curious what your income could look like?
+                <a href="https://www.mysalonsuite.com/profit-calculator/" target="_blank">Run your numbers with the free Profit Calculator.</a>
+            </p>
+        </div>
+        <div class="footer">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <p>&copy; 2026 My Salon Suite - Blaine. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

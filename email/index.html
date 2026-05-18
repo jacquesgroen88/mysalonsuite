@@ -103,6 +103,57 @@
             color: #666666;
         }
 
+        .badge.v2 {
+            background-color: #F15A29;
+            color: #FFFFFF;
+        }
+
+        .badge.onboarding {
+            background-color: #78CDD1;
+            color: #080001;
+        }
+
+        .version-toggle {
+            display: flex;
+            gap: 0;
+            padding: 12px 20px;
+            background-color: #FAFAFB;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .version-toggle button {
+            flex: 1;
+            padding: 8px 0;
+            border: 1px solid #EEEEEE;
+            background: #FFFFFF;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            transition: all 0.2s ease;
+        }
+
+        .version-toggle button:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .version-toggle button:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .version-toggle button.active {
+            background-color: #080001;
+            color: #FFFFFF;
+            border-color: #080001;
+        }
+
+        .v1-section, .v2-section {
+            display: block;
+        }
+
         .viewer {
             flex-grow: 1;
             display: flex;
@@ -189,6 +240,40 @@
             <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
         </div>
 
+        <div class="version-toggle">
+            <button class="active" id="btn-v1" onclick="showVersion('v1')">v1 Original</button>
+            <button id="btn-v2" onclick="showVersion('v2')">v2 Updated</button>
+        </div>
+
+        <!-- V2 SECTION -->
+        <div class="v2-section" id="v2-section" style="display:none;">
+            <div class="sidebar-title" style="color:#F15A29;">Member Onboarding</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v2/00-member-onboarding-html.html', this)">
+                    <span class="email-name">00. Member Onboarding</span>
+                    <span class="badge onboarding">NEW</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#F15A29;">Tour Sequence — v2</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v2/01-tour-requested-html.html', this)">
+                    <span class="email-name">01. Tour Requested</span>
+                    <span class="badge v2">v2</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v2/02-tour-preparation-text.txt', this)">
+                    <span class="email-name">02. Tour Preparation</span>
+                    <span class="badge v2">v2</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v2/03-profit-visualization-html.html', this)">
+                    <span class="email-name">03. Profit Visualization</span>
+                    <span class="badge v2">v2</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#888; font-size:11px;">All other sequences unchanged from v1</div>
+        </div>
+
+        <!-- V1 SECTION -->
+        <div class="v1-section" id="v1-section">
         <div class="sidebar-title">Initial Tour Sequence</div>
         <ul class="email-list">
             <li class="email-item active" onclick="loadEmail('01-tour-requested-html.html', this)">
@@ -297,6 +382,7 @@
             </li>
         </ul>
 
+        </div><!-- end v1-section -->
     </div>
 
     <div class="viewer">
@@ -314,15 +400,10 @@
 
     <script>
         function loadEmail(filename, element) {
-            // Update active state in sidebar
             document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
-
-            // Update title
             const title = element.querySelector('.email-name').innerText;
             document.getElementById('current-title').innerText = title;
-
-            // Load iframe
             document.getElementById('email-frame').src = filename;
         }
 
@@ -330,7 +411,6 @@
             const frame = document.getElementById('email-frame');
             const btnDesktop = document.getElementById('btn-desktop');
             const btnMobile = document.getElementById('btn-mobile');
-
             if (type === 'mobile') {
                 frame.classList.add('mobile');
                 btnMobile.classList.add('active');
@@ -339,6 +419,30 @@
                 frame.classList.remove('mobile');
                 btnDesktop.classList.add('active');
                 btnMobile.classList.remove('active');
+            }
+        }
+
+        function showVersion(version) {
+            const v1 = document.getElementById('v1-section');
+            const v2 = document.getElementById('v2-section');
+            const btnV1 = document.getElementById('btn-v1');
+            const btnV2 = document.getElementById('btn-v2');
+            if (version === 'v2') {
+                v1.style.display = 'none';
+                v2.style.display = 'block';
+                btnV2.classList.add('active');
+                btnV1.classList.remove('active');
+                // Auto-load first v2 email
+                const first = v2.querySelector('.email-item');
+                if (first) first.click();
+            } else {
+                v2.style.display = 'none';
+                v1.style.display = 'block';
+                btnV1.classList.add('active');
+                btnV2.classList.remove('active');
+                // Auto-load first v1 email
+                const first = v1.querySelector('.email-item');
+                if (first) first.click();
             }
         }
     </script>

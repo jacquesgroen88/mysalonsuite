@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Salon Suite Blaine - VIP Tour Reservation</title>
+    <meta name="description" content="Launch Your Own Salon Suite in Blaine. Keep 100% of your profits in a premium, private environment.">
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Variant B Specific Overrides (Direct Response Layout) -->
+    <style>
+        .hero {
+            height: auto !important;
+            min-height: 0 !important;
+            padding-bottom: 5rem;
+        }
+        .split-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            text-align: left;
+            max-width: 1200px !important;
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+        .split-hero .hero-bg {
+            opacity: 0.35;
+            filter: blur(8px) brightness(0.5);
+            transform: scale(1.05);
+        }
+        .hero-text-side h1 {
+            font-size: clamp(2.25rem, 4vw, 3.5rem);
+            margin-bottom: 1.25rem;
+            line-height: 1.05;
+        }
+        .hero-benefits {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        .hero-benefits li {
+            font-size: 1.2rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Ultra-Premium, Compact Lead Form */
+        .v2-form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.5);
+            text-align: left;
+        }
+        .v2-form-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.85rem;
+            letter-spacing: -0.5px;
+            font-family: var(--font-serif);
+        }
+        .v2-form-card .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .v2-form-card .form-group label {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+        .v2-form-card .form-control {
+            border: 1px solid #ddd;
+            background: #fff;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--dark);
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .v2-form-card .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(241, 90, 41, 0.15);
+        }
+        .v2-form-card button {
+            margin-top: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(241, 90, 41, 0.2);
+            width: 100%;
+        }
+        .v2-form-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(241, 90, 41, 0.3);
+        }
+        
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero { padding-bottom: 2rem; }
+            .split-hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding-top: 2rem;
+                text-align: center;
+            }
+            .hero-badge { margin: 0 auto 1.5rem auto !important; display: inline-block; }
+            .hero-benefits li { justify-content: flex-start; text-align: left; font-size: 1.1rem; }
+            .v2-form-card { padding: 1.5rem; }
+            .form-grid-2 { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Audience Banner -->
+    <div class="top-banner" style="background: var(--dark); color: var(--primary); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem;">
+        Now Accepting Applications: Elite Beauty Professionals in Blaine, MN
+    </div>
+
+    <!-- Header -->
+    <header class="luxury-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            </a>
+            <a href="#hero-form" class="btn-primary" style="padding: 0.8rem 2rem; font-size: 0.875rem;">Check Availability</a>
+        </div>
+    </header>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta">
+        <a href="#hero-form" class="btn-primary" style="width: 100%;">Instantly Check Availability</a>
+    </div>
+
+    <!-- 1. SPLIT HERO SECTION (COMPACT & POWERFUL) -->
+    <section class="hero">
+        <div class="hero-bg-wrapper">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/05/content-with-links-01.jpg" alt="Premium Salon Interior" class="hero-bg">
+        </div>
+        <div class="container hero-content split-hero">
+            
+            <div class="hero-text-side">
+                <span class="hero-badge animate-up" style="margin: 0 0 1.25rem 0; border: 1px solid rgba(255,255,255,0.2);">Take Total Control</span>
+                <h1 class="animate-up delay-1">Keep <span style="color: var(--primary);">100%</span> of your profit in a premium, private suite.</h1>
+                
+                <ul class="hero-benefits animate-up delay-2">
+                    <li>
+                        <svg width="28" height="28" stroke="var(--primary)" fill="none" stroke-width="3" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Fully furnished & move-in ready today.
+                    </li>
+                    <li>
+                        <svg width="28" height="28" stroke="var(--primary)" fill="none" stroke-width="3" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Control your exact pricing, products & schedule.
+                    </li>
+                    <li>
+                        <svg width="28" height="28" stroke="var(--primary)" fill="none" stroke-width="3" style="flex-shrink: 0;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Secure, 24/7 access to your own locked space.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="hero-form-side animate-up delay-3" id="hero-form">
+                <div class="v2-form-card">
+                    <h3>Secure Your Private Tour</h3>
+                    <p style="color: #666; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.4;">Availability in Blaine is strictly limited. Enter your information to view remaining suites.</p>
+                    <form id="ghl-form-v2" action="#" method="POST">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required placeholder="First and Last Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Direct Phone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required placeholder="(xxx) xxx-xxxx">
+                            </div>
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label for="email">Professional Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required placeholder="you@brand.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="preferred_time">Tour Options</label>
+                                <select id="preferred_time" name="preferred_time" class="form-control" required style="cursor: pointer;">
+                                    <option value="" disabled selected>Tap to select...</option>
+                                    <option value="Morning">Morning</option>
+                                    <option value="Afternoon">Afternoon</option>
+                                    <option value="Evening">Evening</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Check Availability Instantly</button>
+                        <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 1rem; font-weight: 500;">Your details are strictly confidential. No obligations.</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OVERLAPPING COST REASSURANCE BANNER -->
+    <section class="reassurance-banner" style="position: relative; z-index: 10; margin-top: -3rem;">
+        <div class="container reassurance-flex" style="background: var(--white); border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.06); border: 1px solid #eee;">
+            <div class="reassurance-box" style="padding: 2rem; border-right: 1px solid #f5f5f5;">
+                <h4 style="color: var(--dark);">Zero</h4>
+                <p>Large Build-Out Costs</p>
+            </div>
+            <div class="reassurance-box" style="padding: 2rem; border-right: 1px solid #f5f5f5;">
+                <h4 style="color: var(--dark);">Included</h4>
+                <p>All Utilities & Fast Wi-Fi</p>
+            </div>
+            <div class="reassurance-box" style="padding: 2rem;">
+                <h4 style="color: var(--dark);">Flexible</h4>
+                <p>Leasing Options</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGH IMPACT COMPARISON -->
+    <section class="comparison-section" style="padding: 6rem 0; background-color: var(--white);">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 4rem;">
+                <h2>How We <span class="serif-accent">Compare</span></h2>
+                <p style="font-size: 1.25rem; color: #666; max-width: 600px; margin: 0 auto;">See exactly why the top professionals in Blaine are transitioning away from traditional salons to total ownership.</p>
+            </div>
+            <div class="comparison-table-wrapper" style="overflow-x: auto; margin-top: 0;">
+                <table class="luxury-table">
+                    <thead style="background: #fbfbfb;">
+                        <tr>
+                            <th style="text-align: left; padding-left: 2rem;">Key Benefits</th>
+                            <th class="highlight-col"><img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="MSS" style="max-height: 30px; margin: 0 auto; display: block;"></th>
+                            <th>Traditional Salon</th>
+                            <th>Booth Rental</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; padding-left: 2rem;"><strong>Income Kept</strong></td>
+                            <td class="highlight-col"><strong style="color: var(--primary); font-size: 1.25rem;">100%</strong></td>
+                            <td>40-50% Split</td>
+                            <td>Varies heavily</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 2rem;"><strong>Retail Profits</strong></td>
+                            <td class="highlight-col"><svg width="24" height="24" stroke="var(--primary)" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> You keep it all</td>
+                            <td><svg width="24" height="24" stroke="#d9534f" fill="none" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> 10% or nothing</td>
+                            <td><svg width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Minor markups</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 2rem;"><strong>Work Environment</strong></td>
+                            <td class="highlight-col"><svg width="24" height="24" stroke="var(--primary)" fill="none" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Private, Secure Suite</td>
+                            <td><svg width="24" height="24" stroke="#d9534f" fill="none" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Open Floor / Stressful</td>
+                            <td><svg width="24" height="24" stroke="#d9534f" fill="none" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Shared / Loud</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#hero-form" class="btn-primary">Check Pricing & Availability</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO IMMERSION SECTION -->
+    <section class="video-section" style="padding: 6rem 0; background-color: var(--light-gray);">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 4rem;">
+                <h2>Experience The <span class="serif-accent">Suite Life</span></h2>
+                <p style="font-size: 1.25rem; color: #666; max-width: 600px; margin: 0 auto;">See firsthand what it means to take control of your career in a premium My Salon Suite environment.</p>
+            </div>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 1000px; margin: 0 auto; border-radius: 16px; box-shadow: 0 40px 80px rgba(0,0,0,0.15);">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/jiIx8ejar-Q?si=f9G6NDAaU6Ucacor" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE IMMERSION -->
+    <section class="value-section" id="value" style="padding: 6rem 0; background-color: var(--white);">
+        <div class="container">
+            <div class="value-header">
+                <h2>The <span class="serif-accent">Suite</span> Advantage</h2>
+            </div>
+            
+            <div class="value-card-luxury">
+                <div class="value-img-col">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/slider-gallery-01-1-790x1024.jpg" alt="Custom Suite" style="border-radius: 12px;">
+                </div>
+                <div class="value-text-col">
+                    <div class="value-number">01</div>
+                    <h3>Your Space, Your Brand</h3>
+                    <p>It's your name on the door. Fully customize your state-of-the-art suite. Paint the walls, play your own music, and create an exclusive atmosphere that perfectly represents your unique brand.</p>
+                </div>
+            </div>
+
+            <div class="value-card-luxury">
+                <div class="value-img-col">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/12/haircut.webp" alt="Profits" style="border-radius: 12px;">
+                </div>
+                <div class="value-text-col">
+                    <div class="value-number">02</div>
+                    <h3>Keep Everything You Earn</h3>
+                    <p>Say goodbye to restrictive commission splits. You keep 100% of your service income and 100% of the profits from the retail products you choose to sell. Total financial control.</p>
+                </div>
+            </div>
+
+            <div class="value-card-luxury">
+                <div class="value-img-col">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/05/content-with-links-01.jpg" alt="Boss" style="border-radius: 12px;">
+                </div>
+                <div class="value-text-col">
+                    <div class="value-number">03</div>
+                    <h3>Be Your Own Boss</h3>
+                    <p>No mandatory meetings. No mandatory hours. Access your secure luxury suite 24/7. You set your schedule, establish your pricing, and manage your clients on your exact terms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFFERENTIATION -->
+    <section class="usp-section" style="padding: 6rem 0; background: var(--dark); color: var(--white);">
+        <div class="container usp-grid">
+            <div class="usp-content">
+                <h2 style="color: var(--white);">Why My Salon Suite <span class="serif-accent">Blaine?</span></h2>
+                
+                <div class="usp-item">
+                    <div class="usp-icon" style="color: var(--primary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--white);">Fully Furnished & Move-In Ready</h3>
+                        <p style="color: #bbb;">High-end styling station, full-length mirror, shampoo bowl, and a premium chair are all included from day one.</p>
+                    </div>
+                </div>
+
+                <div class="usp-item">
+                    <div class="usp-icon" style="color: var(--primary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--white);">Prime Blaine Location</h3>
+                        <p style="color: #bbb;">High visibility in a premium shopping center, offering ample free parking and extreme convenience for your established clientele.</p>
+                    </div>
+                </div>
+
+                <div class="usp-item">
+                    <div class="usp-icon" style="color: var(--primary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--white);">Elite Professional Community</h3>
+                        <p style="color: #bbb;">Surround yourself with a curated network of driven, top-tier beauty professionals dedicated to elevating their craft.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/05/slider-boxes-03-790x1024.jpg" alt="Interior Details" style="border-radius: 8px;">
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="#hero-form" class="btn-primary">View Suite Pricing</a>
+        </div>
+    </section>
+
+    <!-- REAL RESULTS SECTION -->
+    <section class="value-section" style="background-color: var(--light-gray); padding: 8rem 0;">
+        <div class="container">
+            <div class="value-header" style="margin-bottom: 4rem;">
+                <h2>Hear From Our <span class="serif-accent">Community</span></h2>
+            </div>
+            <div class="testimonial-row-container">
+                <!-- T1: Annique -->
+                <div class="testimonial-row">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/annique-01.jpg" alt="Annique" class="testimonial-row-img">
+                    <div class="testimonial-row-content">
+                        <p style="font-style: italic; font-size: 1.125rem; margin-bottom: 1.25rem; color: #444;">"Moving to My Salon Suite, I was able to grow my income as well as find the luxurious experience that I was looking for."</p>
+                        <div>
+                            <strong style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Annique</strong><br>
+                            <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Multi Suite Owner</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- T2: Paige -->
+                <div class="testimonial-row">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/paige-01.jpg" alt="Paige" class="testimonial-row-img">
+                    <div class="testimonial-row-content">
+                        <p style="font-style: italic; font-size: 1.125rem; margin-bottom: 1.25rem; color: #444;">"One of the best things My Salon Suite offered was all of the tools that I needed to open a business. It is the best decision I have ever made."</p>
+                        <div>
+                            <strong style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Paige</strong><br>
+                            <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Hairstylist</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- T3: Rebekah -->
+                <div class="testimonial-row">
+                    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/rebekah-01.jpg" alt="Rebekah" class="testimonial-row-img">
+                    <div class="testimonial-row-content">
+                        <p style="font-style: italic; font-size: 1.125rem; margin-bottom: 1.25rem; color: #444;">"My Salon Suite gives me a lot of flexibility. I am accountable for me and only me. I love the fact that I get to have my own business without the huge worry and overhead of opening up a big salon and managing people. This is like the perfect thing."</p>
+                        <div>
+                            <strong style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Rebekah</strong><br>
+                            <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Nail Artist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 1.25rem; padding: 2rem 0;">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite" class="footer-logo">
+            <div class="footer-socials" style="margin: 0.5rem 0;">
+                <a href="https://www.facebook.com/MySalonSuite" target="_blank" aria-label="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/mysalonsuite/" target="_blank" aria-label="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+            <p class="footer-copy">&copy; 2026 My Salon Suite - Blaine. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Form Handle Script -->
+    <script>
+        document.getElementById('ghl-form-v2').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const payload = {
+                v2_split_test: true,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                preferred_time: document.getElementById('preferred_time').value
+            };
+            console.log('Deploying via form submit to GHL (V2 Direct Layout):', payload);
+            alert('Tour Booked via V2 Layout! (GoHighLevel Intercept Connected)');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

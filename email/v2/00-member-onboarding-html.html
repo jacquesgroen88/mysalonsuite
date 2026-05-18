@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Salon Suite - Next Steps</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+
+        body {
+            font-family: 'Jost', Helvetica, Arial, sans-serif;
+            background-color: #FAFAFB;
+            margin: 0;
+            padding: 0;
+            color: #080001;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+        }
+
+        .top-bar {
+            background-color: #F9E3B2;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #080001;
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            padding: 28px 30px;
+            text-align: center;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .header img {
+            height: 35px;
+        }
+
+        /* Hero welcome banner */
+        .hero-banner {
+            width: 100%;
+            height: 220px;
+            background-image: url('https://www.mysalonsuite.com/wp-content/uploads/2025/05/content-with-links-01.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 0, 1, 0.55);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            padding: 50px 40px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin: 0 0 8px;
+            font-style: italic;
+        }
+
+        .hero-text p {
+            font-size: 14px;
+            margin: 0;
+            color: #F9E3B2;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Manager personalisation block */
+        .manager-block {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 24px 40px;
+            background-color: #FAFAFB;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .manager-photo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #DDDDDD;
+        }
+
+        .manager-info p {
+            margin: 0 0 3px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .manager-info strong {
+            font-size: 16px;
+            color: #080001;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .manager-info a {
+            color: #F15A29;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Main content */
+        .content {
+            padding: 36px 40px 40px;
+        }
+
+        .content > p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #444444;
+        }
+
+        /* Section heading */
+        .section-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #F15A29;
+            margin: 32px 0 14px;
+        }
+
+        /* Checklist items */
+        .checklist {
+            list-style: none;
+            margin: 0 0 8px;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            color: #333333;
+            line-height: 1.6;
+            padding: 10px 0;
+            border-bottom: 1px solid #F2F2F2;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            background-color: #F9E3B2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+        }
+
+        .check-icon svg {
+            display: block;
+        }
+
+        .checklist li a {
+            color: #F15A29;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* App download block */
+        .app-block {
+            background-color: #FAFAFB;
+            border: 1px solid #EEEEEE;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-top: 8px;
+        }
+
+        .app-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #EEEEEE;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .app-row:last-child {
+            border-bottom: none;
+        }
+
+        .app-row strong {
+            font-size: 14px;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .app-links a {
+            color: #F15A29;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* Facebook group CTA */
+        .facebook-block {
+            background-color: #E8F0FE;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .facebook-icon {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+        }
+
+        .facebook-block p {
+            font-size: 14px;
+            color: #1a1a2e;
+            margin: 0 0 6px;
+            font-weight: 600;
+        }
+
+        .facebook-block a {
+            color: #1877F2;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* Primary CTA button */
+        .btn-wrapper {
+            text-align: center;
+            margin: 36px 0 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 16px 44px;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid #EEEEEE;
+            margin: 28px 0 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #FAFAFB;
+            padding: 36px 40px;
+            text-align: center;
+            color: #080001;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .footer img {
+            height: 28px;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #666666;
+            margin: 4px 0;
+        }
+
+        .social-links {
+            margin: 18px 0;
+        }
+
+        .social-links a {
+            margin: 0 12px;
+            color: #080001;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">Welcome to My Salon Suite</div>
+
+        <div class="header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        </div>
+
+        <!-- Hero -->
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-text">
+                <h1>Welcome to the family, {{name}}.</h1>
+                <p>Your suite journey starts here</p>
+            </div>
+        </div>
+
+        <!-- Manager block -->
+        <div class="manager-block">
+            <!-- Replace src with actual manager headshot URL -->
+            <img src="{{manager_photo_url}}" alt="{{manager_name}}" class="manager-photo">
+            <div class="manager-info">
+                <strong>{{manager_name}}</strong>
+                <p>Member Relationship Manager, My Salon Suite</p>
+                <a href="tel:{{manager_phone}}">{{manager_phone}}</a> &nbsp;|&nbsp;
+                <a href="mailto:{{manager_email}}">{{manager_email}}</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <p>We're excited to have you join our community of independent beauty and wellness professionals. Below is
+                everything you need to complete before your move-in date. Work through each item and reach out if you
+                have any questions.</p>
+
+            <!-- TO COMPLETE -->
+            <div class="section-label">To Complete</div>
+            <ul class="checklist">
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#F15A29"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Pay your deposit</strong> as outlined in your agreement.</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#F15A29"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Upload your required documents</strong> (Driver's License, Professional License, Liability Insurance Certificate, ACH Form) via the
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScKItqA1YFv1yhdm_9xK8a1s0mND3kddHGfjnannOdGB-DssQ/viewform" target="_blank">Document Upload Form</a>.</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#F15A29"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Complete your member application</strong> (link will be sent separately).</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#F15A29"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Obtain liability insurance.</strong> Not sure where to start? Browse
+                        <a href="https://members.mysalonsuite.com/s/extras#section2" target="_blank">our recommended insurance vendors here</a>.</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#F15A29"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Sign your lease via DocuSign</strong> (you'll receive a separate DocuSign email to complete this step).</span>
+                </li>
+            </ul>
+
+            <!-- WHAT TO REVIEW -->
+            <div class="section-label">What to Review</div>
+            <ul class="checklist">
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#080001"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><a href="https://canva.link/cjbgkqr3nyyymdc" target="_blank">Community Handbook</a>: policies, shared space guidelines, and what to expect as a member.</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#080001"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><a href="https://canva.link/4kmecnnm2pcobkj" target="_blank">Virtual Leasing Folder</a>: your lease, suite details, and important documents in one place.</span>
+                </li>
+                <li>
+                    <span class="check-icon">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="6" fill="#080001"/>
+                            <polyline points="3,6 5,8 9,4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </span>
+                    <span><strong>Handyman service requests</strong>: for any maintenance needs after move-in, contact {{manager_name}} directly at {{manager_phone}}.</span>
+                </li>
+            </ul>
+
+            <!-- PREPARING FOR MOVE-IN -->
+            <div class="section-label">Preparing for Move-In</div>
+            <p style="font-size: 15px; color: #555; margin-bottom: 0; background: #FAFAFB; padding: 16px 20px; border-radius: 4px; border-left: 3px solid #F9E3B2;">
+                After your lease is signed and documents are received, you'll get two separate emails: one with your
+                <strong>My Salon Suite app login</strong> and one with your <strong>ButterflyMX access credentials</strong>.
+                Both are required to access your suite on move-in day.
+            </p>
+
+            <!-- APPS TO DOWNLOAD -->
+            <div class="section-label">Apps to Download</div>
+            <div class="app-block">
+                <div class="app-row">
+                    <strong>My Salon Suite App</strong>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/us/app/my-salon-suite/id1673785078" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.mysalesforce.mycommunity.C00D1I0000002oPcUAI.A0OT8W000000fxSMWAY" target="_blank">Google Play</a>
+                    </div>
+                </div>
+                <div class="app-row">
+                    <strong>ButterflyMX (suite access)</strong>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/us/app/butterflymx/id714133074" target="_blank">App Store</a>
+                        <a href="https://play.google.com/store/apps/details?id=com.butterflymx.butterflymx" target="_blank">Google Play</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FACEBOOK GROUP -->
+            <div class="section-label">Join Your Location's Community</div>
+            <div class="facebook-block">
+                <svg class="facebook-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="21" cy="21" r="21" fill="#1877F2"/>
+                    <path d="M28 14h-3c-1.1 0-2 .9-2 2v3h5l-.7 4H23v10h-4V23h-3v-4h3v-3c0-3.3 2.7-6 6-6h3v4z" fill="white"/>
+                </svg>
+                <div>
+                    <p>Connect with fellow members and stay in the loop on community events and updates.</p>
+                    <a href="{{facebook_group_url}}" target="_blank">Join the Private Facebook Group</a>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="btn-wrapper">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScKItqA1YFv1yhdm_9xK8a1s0mND3kddHGfjnannOdGB-DssQ/viewform" class="btn" target="_blank">Upload Your Documents Now</a>
+            </div>
+
+            <p style="text-align: center; font-size: 14px; color: #888; margin-top: 0;">
+                Questions? Reply to this email or reach out directly to {{manager_name}} at {{manager_phone}}.
+            </p>
+        </div>
+
+        <div class="footer">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <p><strong>My Salon Suite</strong></p>
+            <p>Your Location Manager: {{manager_name}} &bull; {{manager_phone}}</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/MySalonSuite">Facebook</a>
+                <a href="https://www.instagram.com/mysalonsuite/">Instagram</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 10px; opacity: 0.4;">&copy; 2026 My Salon Suite. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
