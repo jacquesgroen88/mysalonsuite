@@ -117,9 +117,36 @@ Used across all v2 emails. Map these in GHL contact fields:
 
 ## Key Stakeholders
 
-- **Rachel Kueppers** — Operations Manager, MSS Minnesota. Primary reviewer and feedback source.
-- **Kayley** — Location manager (one location). Name and contact used in manager personalisation blocks.
-- **Stacey** — Location manager (other location). Original onboarding email template author.
+- **Rachel Kueppers** — Operations Manager, MSS Minnesota. Primary reviewer and feedback source. O: 612.230.3554 | C: 651.315.4837
+- **Stacey Cleveland** — Member Relationship Manager (Blaine, Plymouth, Rogers). Email: scleveland@mysalonsuite.com | Phone: 612-429-6360
+- **Kayley Mundis** — Member Relationship Manager (Apple Valley, Bloomington, Chanhassen). Email: kmundis@mysalonsuite.com | Phone: 612-429-3078
+
+---
+
+## Location & Manager Reference
+
+### Stacey Cleveland — Member Relationship Manager
+- Email: scleveland@mysalonsuite.com
+- Phone: 612-429-6360
+- **Blaine:** 1341 113th Ave NE, Blaine, MN 55434 | Facebook: https://www.facebook.com/mysalonsuiteblaine
+- Plymouth: 4190 Vinewood Lane N, Suite 102, Plymouth, MN 55442 | Facebook: https://www.facebook.com/mysalonsuiteplymouth
+- Rogers: 21051 135th Ave N, Rogers, MN 55374 | Facebook: https://www.facebook.com/mysalonsuiterogers
+- Headshot: `manager-photos/stacey-cleveland.jpg` → `https://mysalonsuite.netlify.app/manager-photos/stacey-cleveland.jpg`
+
+### Kayley Mundis — Member Relationship Manager
+- Email: kmundis@mysalonsuite.com
+- Phone: 612-429-3078
+- Apple Valley: 6906 153rd St W, Apple Valley, MN 55124 | Facebook: https://www.facebook.com/mysalonsuiteapplevalley
+- Bloomington: 7989 Southtown Center, Bloomington, MN 55431 | Facebook: https://www.facebook.com/mysalonsuitebloomington
+- Chanhassen: 8951 Crossroads Blvd, Chanhassen, MN 55317 | Facebook: https://www.facebook.com/mysalonsuitechanhassen
+- Headshot: `manager-photos/kayley-mundis.jpg` → `https://mysalonsuite.netlify.app/manager-photos/kayley-mundis.jpg`
+
+### Additional Staff
+- **Merrick** — Maintenance Manager. Headshot: `manager-photos/merrick.jpg`
+- **Rachel Kueppers** — Operations Manager. Headshot: `manager-photos/rachel-kueppers.jpg`
+
+### Outstanding Placeholder
+- `{{calendly_url}}` — NOT yet provided. Keep as GHL variable until Calendly URL is supplied.
 
 ---
 
@@ -127,6 +154,7 @@ Used across all v2 emails. Map these in GHL contact fields:
 
 | Asset type | Source |
 |------------|--------|
+| Manager headshots | Email attachments from Rachel (saved to `manager-photos/`) — Stacey, Kayley, Merrick, Rachel |
 | Blaine location photos | Google Drive (downloaded to `blaine-photos/`) |
 | Before/after pairs | Google Drive folder `1MwamZ_mAxqmdPjP0wJMcOqZLNbVLbdz7` (downloaded to `before-after/`) |
 | MSS brand photos | `www.mysalonsuite.com/wp-content/uploads/` |
