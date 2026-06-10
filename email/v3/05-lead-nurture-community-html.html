@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Total Security - My Salon Suite Blaine</title>
+    <title>Community Spotlight - My Salon Suite Blaine</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
 
@@ -14,7 +14,6 @@
             margin: 0;
             padding: 0;
             color: #080001;
-            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -47,21 +46,20 @@
 
         .hero-banner {
             width: 100%;
-            height: 250px;
-            background-color: #FAFAFB;
-            background-image: url('https://mysalonsuite.netlify.app/blaine-photos/Lobby.jpg');
+            height: 320px;
+            background-image: url('https://mysalonsuite.netlify.app/blaine-photos/Arielle.jpeg');
             background-size: cover;
-            background-position: center;
+            background-position: center 25%;
         }
 
         .content {
-            padding: 32px 40px 50px;
+            padding: 50px 40px;
         }
 
         .content h1 {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
-            color: #F15A29;
+            color: #080001;
             margin-bottom: 25px;
             text-align: center;
             font-style: italic;
@@ -70,35 +68,57 @@
         .content p {
             font-size: 16px;
             line-height: 1.8;
+            color: #444444;
             margin-bottom: 25px;
-            color: #444444;
         }
 
-        .highlight-box {
+        .testimonial-card {
             background-color: #FAFAFB;
-            padding: 30px;
-            border-radius: 4px;
             border-left: 4px solid #F15A29;
-            margin-bottom: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 0 4px 4px 0;
         }
 
-        .highlight-box h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 18px;
             color: #080001;
-            margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
-        .highlight-box p {
-            margin: 0;
+        .testimonial-card .author {
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F15A29;
+        }
+
+        .availability {
+            background-color: #F9E3B2;
+            padding: 40px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .availability h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #080001;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .availability p {
+            margin-bottom: 25px;
             font-size: 15px;
-            color: #444444;
         }
 
         .btn-wrapper {
             text-align: center;
-            margin: 40px 0;
+            margin-top: 40px;
         }
 
         .btn {
@@ -137,29 +157,34 @@
 
 <body>
     <div class="container">
-        <div class="top-bar">Work On Your Own Terms</div>
+        <div class="top-bar">Join the Community in Blaine, MN</div>
         <div class="header">
             <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
         </div>
         <div class="hero-banner"></div>
         <div class="content">
-            <h1>Your Sanctuary. Total Security.</h1>
+            <h1>Surround Yourself with Success.</h1>
             <p>Hi {{name}},</p>
-            <p>When you own your own salon suite, you dictate your hours. Whether you're an early bird starting at 6 AM
-                or a night owl taking clients until 10 PM, your business should work around your life.</p>
+            <p>Independence doesn't mean being alone. At My Salon Suite Blaine, you're joining a community of the most
+                ambitious and driven beauty professionals in the industry, celebrating every grand opening, every
+                milestone, and every win together!</p>
 
-            <div class="highlight-box">
-                <h3>State-of-the-Art Security</h3>
-                <p>Our Blaine location features a 24/7 double-door security system. You can securely "buzz in" your
-                    clients right from your phone, ensuring you always know exactly who is in the building.</p>
-                <img src="https://mysalonsuite.netlify.app/blaine-photos/Security%20System%20-%20Call%20Box.jpg" alt="Secure entry call box at My Salon Suite Blaine" style="width:100%; border-radius:4px; margin-top:18px; display:block;">
+            <div class="testimonial-card">
+                <p>"My Salon Suite gives me a lot of flexibility. I am accountable for me and only me. I love the fact
+                    that I get to have my own business without the huge worry and overhead of opening up a big salon."
+                </p>
+                <div class="author">A My Salon Suite Member</div>
             </div>
 
-            <p>Peace of mind isn't a luxury; it's a necessity. We provide a completely secure environment so you can
-                focus entirely on doing what you do best—delivering incredible experiences to your clients.</p>
+            <p>Our suites are more than just four walls, they are the foundation for your brand's legacy. But
+                availability is shifting quickly!</p>
 
-            <div class="btn-wrapper">
-                <a href="https://mysalonsuiteblaine.com/#book-tour" class="btn">Tour The Suites</a>
+            <div class="availability">
+                <h3>Only 3 Premium Suites Left</h3>
+                <p>Don't wait for your dream space to be claimed by someone else. Join the community in Blaine
+                    today.</p>
+                <a href="https://mysalonsuiteblaine.com/#book-tour" class="btn" style="background-color: #080001;">View
+                    Remaining Suites</a>
             </div>
         </div>
         <div class="footer">
