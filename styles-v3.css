@@ -1,0 +1,173 @@
+/* =====================================================================
+   styles-v3.css  —  My Salon Suite Blaine, Version 3
+   Applies the official MSS Brand Style Guide (rev. 1/25) + Rachel's
+   June 3 feedback. ADDITIVE ONLY and fully scoped under `body.v3`
+   so v1 (styles.css) and v2 (styles-v2.css) remain untouched.
+
+   Brand palette:  Spicy Lava #F15A29 · Golden Saffron #F9E3B2
+                   Cool Seafoam #78CDD1 · Sleek Black #080001
+   Brand fonts:    Albra (headlines, lowercase)  -> Fraunces fallback
+                   Cera  (body)                  -> Poppins fallback
+   ===================================================================== */
+
+/* ---- 1. Brand tokens (override only within v3) ---- */
+body.v3 {
+    --primary:       #F15A29; /* spicy lava  */
+    --saffron:       #F9E3B2; /* golden saffron */
+    --seafoam:       #78CDD1; /* cool seafoam */
+    --ink:           #080001; /* sleek black */
+    --cream:         #FBF5EA;
+    --font-serif:    'Fraunces', Georgia, 'Times New Roman', serif;   /* Albra stand-in */
+    --font-sans:     'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* Cera stand-in */
+    font-family: var(--font-sans);
+    color: var(--ink);
+}
+
+body.v3 p,
+body.v3 .tag,
+body.v3 .btn-primary,
+body.v3 .btn-outline,
+body.v3 input,
+body.v3 select,
+body.v3 label { font-family: var(--font-sans); }
+
+/* ---- 2. Albra-style headlines: serif, lowercase, tight tracking ---- */
+body.v3 h1,
+body.v3 h2,
+body.v3 h3,
+body.v3 .value-header h2,
+body.v3 .blaine-location-header h2 {
+    font-family: var(--font-serif);
+    text-transform: lowercase;     /* Albra is always all-lowercase */
+    letter-spacing: -0.02em;       /* tracking 0 to -40 per guide   */
+    font-weight: 500;
+}
+/* keep the serif accent but tint it saffron-on-dark / lava-on-light */
+body.v3 .serif-accent { font-style: italic; color: var(--primary); }
+body.v3 .hero .serif-accent { color: var(--saffron); }
+body.v3 .gallery-filter-section .serif-accent { color: var(--saffron); }
+
+/* ---- 3. Brand color bars (signature MSS art element) ---- */
+body.v3 .brand-color-bars {
+    display: flex;
+    height: 6px;
+    width: 100%;
+}
+body.v3 .brand-color-bars span { flex: 1; }
+body.v3 .brand-color-bars .bar-saffron { background: var(--saffron); }
+body.v3 .brand-color-bars .bar-lava    { background: var(--primary); }
+body.v3 .brand-color-bars .bar-seafoam { background: var(--seafoam); }
+body.v3 .brand-color-bars .bar-ink     { background: var(--ink); }
+
+/* a slim accent bar used under section headers */
+body.v3 .brand-accent-bar {
+    display: flex;
+    height: 5px;
+    width: 64px;
+    margin: 1rem auto 0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+body.v3 .brand-accent-bar span { flex: 1; }
+
+/* ---- 4. Brand statement chip ("creative space. creative people.") ---- */
+body.v3 .brand-statement {
+    font-family: var(--font-serif);
+    text-transform: lowercase;
+    font-style: italic;
+    letter-spacing: -0.01em;
+}
+
+/* ---- 5. June 3 feedback: shrink "Suite Advantage" photos ---- */
+/* "Make photos in The Suite Advantage way smaller. The spacing makes
+    it take too long to scroll." -> tighten the cards + cap image size. */
+body.v3 .value-card-luxury {
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;        /* was large; reduce scroll length */
+    padding: 1.5rem 0;
+}
+body.v3 .value-img-col img {
+    max-height: 300px;            /* was full-bleed tall portrait */
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+body.v3 .value-img-col {
+    max-width: 380px;
+    margin: 0 auto;
+}
+body.v3 .value-section { padding: 4rem 0 !important; }
+
+/* ---- 6. June 3 feedback: before/after sliders, two side-by-side ---- */
+body.v3 .before-after-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+body.v3 .before-after-duo .before-after-wrap { margin: 0; }
+body.v3 .before-after-slider {
+    --divider-width: 2px;
+    --divider-color: #fff;
+    --default-handle-color: #fff;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 48px rgba(8,0,1,0.18);
+}
+body.v3 .before-after-slider img { display: block; width: 100%; }
+
+/* ---- 7. Section rhythm + brand backgrounds ---- */
+body.v3 .reassurance-banner { background: var(--ink); }
+body.v3 .reassurance-box h4 { font-family: var(--font-serif); color: var(--saffron); text-transform: lowercase; }
+body.v3 .gallery-filter-section { background: var(--ink); }
+body.v3 .filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+body.v3 .top-banner { background: var(--ink); letter-spacing: 0.04em; }
+
+/* seafoam used as a soft section tint for variety */
+body.v3 .usp-section { background: linear-gradient(180deg, #fff 0%, var(--cream) 100%); }
+
+/* ---- 8. iPhone overlap fixes (June 3: "Overlapping on iphone") ---- */
+@media (max-width: 480px) {
+    body.v3 h1 { font-size: 2.1rem; line-height: 1.12; }
+    body.v3 h2 { font-size: 1.7rem; line-height: 1.15; }
+
+    /* before/after stacks on small screens */
+    body.v3 .before-after-duo { grid-template-columns: 1fr; gap: 1.25rem; }
+
+    /* Suite Advantage cards stack cleanly, image first, no overlap */
+    body.v3 .value-card-luxury {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+    }
+    body.v3 .value-img-col { max-width: 100%; }
+    body.v3 .value-img-col img { max-height: 240px; }
+
+    /* floating "100%" card was overlapping the hero image on iPhone */
+    body.v3 .floating-card {
+        position: static !important;
+        margin: 1rem auto 0;
+        display: inline-block;
+    }
+    body.v3 .audience-image-wrapper { overflow: visible; }
+
+    /* hero actions wrap instead of overflowing */
+    body.v3 .hero-actions { flex-wrap: wrap; gap: 0.75rem; }
+    body.v3 .hero-actions .btn-primary,
+    body.v3 .hero-actions .btn-outline { width: 100%; text-align: center; }
+
+    /* profession tags breathe */
+    body.v3 .profession-tags { gap: 0.5rem; }
+
+    /* brand color bars stay flush */
+    body.v3 .brand-color-bars { height: 5px; }
+}
+
+/* ---- 9. Buttons keep brand lava, add seafoam outline option ---- */
+body.v3 .btn-primary { background: var(--primary); border-color: var(--primary); }
+body.v3 .btn-primary:hover { background: #d94a1e; border-color: #d94a1e; }
+body.v3 .btn-outline:hover { background: var(--saffron); color: var(--ink); border-color: var(--saffron); }
