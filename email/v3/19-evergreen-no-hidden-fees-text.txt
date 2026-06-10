@@ -9,7 +9,7 @@ But there is one question you *must* ask any suite provider: "What isn't include
 At My Salon Suite Blaine, we believe in radical transparency. Our affordable, flat-rate rent covers the amenities we promise. 
 
 That means:
-- All utilities (water, electric) are included.
+- All utilities (water, electric, etc.) are included.
 - High-speed Wi-Fi is included.
 - 24/7 security access is included.
 - High-end equipment like styling stations and shampoo bowls are included.

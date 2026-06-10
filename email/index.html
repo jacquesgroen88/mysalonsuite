@@ -113,6 +113,11 @@
             color: #080001;
         }
 
+        .badge.v3 {
+            background-color: #2E7D32;
+            color: #FFFFFF;
+        }
+
         .version-toggle {
             display: flex;
             gap: 0;
@@ -150,7 +155,7 @@
             border-color: #080001;
         }
 
-        .v1-section, .v2-section {
+        .v1-section, .v2-section, .v3-section {
             display: block;
         }
 
@@ -243,6 +248,43 @@
         <div class="version-toggle">
             <button class="active" id="btn-v1" onclick="showVersion('v1')">v1 Original</button>
             <button id="btn-v2" onclick="showVersion('v2')">v2 Updated</button>
+            <button id="btn-v3" onclick="showVersion('v3')">v3 Final</button>
+        </div>
+
+        <!-- V3 SECTION -->
+        <div class="v3-section" id="v3-section" style="display:none;">
+            <div class="sidebar-title" style="color:#2E7D32;">v3 — Rachel's June 10 Feedback</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v3/01-tour-requested-html.html', this)">
+                    <span class="email-name">01. Tour Requested</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/08-guide-tour-push-html.html', this)">
+                    <span class="email-name">08. Guide Tour Push</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/09-evergreen-security-html.html', this)">
+                    <span class="email-name">09. Evergreen Security</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/10-evergreen-decor-text.txt', this)">
+                    <span class="email-name">10. Evergreen Decor</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/11-evergreen-client-exp-html.html', this)">
+                    <span class="email-name">11. VIP Client Experience</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/12-evergreen-tax-benefits-text.txt', this)">
+                    <span class="email-name">12. Tax Benefits (Stride)</span>
+                    <span class="badge v3">v3</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v3/19-evergreen-no-hidden-fees-text.txt', this)">
+                    <span class="email-name">19. No Hidden Fees</span>
+                    <span class="badge v3">v3</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#888; font-size:11px;">More emails being revised — photo swaps + new sequences in progress</div>
         </div>
 
         <!-- V2 SECTION -->
@@ -423,27 +465,18 @@
         }
 
         function showVersion(version) {
-            const v1 = document.getElementById('v1-section');
-            const v2 = document.getElementById('v2-section');
-            const btnV1 = document.getElementById('btn-v1');
-            const btnV2 = document.getElementById('btn-v2');
-            if (version === 'v2') {
-                v1.style.display = 'none';
-                v2.style.display = 'block';
-                btnV2.classList.add('active');
-                btnV1.classList.remove('active');
-                // Auto-load first v2 email
-                const first = v2.querySelector('.email-item');
-                if (first) first.click();
-            } else {
-                v2.style.display = 'none';
-                v1.style.display = 'block';
-                btnV1.classList.add('active');
-                btnV2.classList.remove('active');
-                // Auto-load first v1 email
-                const first = v1.querySelector('.email-item');
-                if (first) first.click();
-            }
+            const versions = ['v1', 'v2', 'v3'];
+            versions.forEach(function(v) {
+                const section = document.getElementById(v + '-section');
+                const btn = document.getElementById('btn-' + v);
+                const isActive = (v === version);
+                if (section) section.style.display = isActive ? 'block' : 'none';
+                if (btn) btn.classList.toggle('active', isActive);
+            });
+            // Auto-load first email of the selected version
+            const active = document.getElementById(version + '-section');
+            const first = active ? active.querySelector('.email-item') : null;
+            if (first) first.click();
         }
     </script>
 </body>
