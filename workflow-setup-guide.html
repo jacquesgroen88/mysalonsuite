@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSS Blaine — GHL Workflow Setup Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f7; color: #1d1d1f; }
+  .header { background: #F15A29; color: white; padding: 2rem; text-align: center; }
+  .header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .header p { opacity: 0.9; font-size: 0.95rem; }
+  .container { max-width: 860px; margin: 2rem auto; padding: 0 1.5rem 4rem; }
+  .summary-box { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; border-left: 4px solid #F15A29; }
+  .summary-box h2 { font-size: 1.1rem; margin-bottom: 0.8rem; color: #F15A29; }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .summary-item { background: #f5f5f7; border-radius: 8px; padding: 0.8rem 1rem; }
+  .summary-item .label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+  .summary-item .val { font-size: 0.9rem; font-weight: 600; }
+
+  .workflow { background: white; border-radius: 12px; margin-bottom: 2rem; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .workflow-header { background: #1d1d1f; color: white; padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+  .wf-num { background: #F15A29; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }
+  .workflow-header h3 { font-size: 1.05rem; flex: 1; }
+  .badge { background: rgba(255,255,255,0.15); padding: 0.25rem 0.65rem; border-radius: 20px; font-size: 0.75rem; white-space: nowrap; }
+  .workflow-body { padding: 1.5rem; }
+
+  .step-section { margin-bottom: 1.4rem; }
+  .step-section h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #888; margin-bottom: 0.7rem; border-bottom: 1px solid #eee; padding-bottom: 0.4rem; }
+  ol { padding-left: 1.4rem; }
+  ol li { margin-bottom: 0.5rem; font-size: 0.9rem; line-height: 1.5; }
+  code { background: #f0f0f0; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.82rem; color: #c41230; }
+  .nav-path { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.6rem 1rem; font-size: 0.85rem; color: #444; margin-bottom: 0.8rem; }
+  .nav-path span { color: #888; margin: 0 0.3rem; }
+  .note { background: #fff8e7; border: 1px solid #ffd54f; border-radius: 6px; padding: 0.7rem 1rem; font-size: 0.85rem; color: #664d00; margin-top: 0.8rem; }
+  .note strong { color: #4d3800; }
+  .action-chain { display: flex; flex-direction: column; gap: 0; }
+  .action-step { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.7rem 0; border-bottom: 1px dashed #eee; }
+  .action-step:last-child { border-bottom: none; }
+  .action-icon { background: #F15A29; color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+  .action-icon.wait { background: #5856d6; }
+  .action-icon.cond { background: #34c759; }
+  .action-icon.tag { background: #ff9500; }
+  .action-text { font-size: 0.88rem; line-height: 1.4; }
+  .action-text strong { display: block; margin-bottom: 0.1rem; }
+
+  .fields-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.8rem; }
+  .fields-table th { background: #f5f5f7; text-align: left; padding: 0.5rem 0.8rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #666; }
+  .fields-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #f0f0f0; }
+  .fields-table tr:last-child td { border-bottom: none; }
+  .id-mono { font-family: monospace; font-size: 0.78rem; color: #888; }
+
+  .todo { background: #e8f5e9; border-left: 4px solid #34c759; padding: 0.8rem 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem; font-size: 0.88rem; }
+  .todo strong { color: #1b5e20; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>GHL Workflow Setup Guide</h1>
+  <p>My Salon Suite — Blaine Location &nbsp;|&nbsp; 4 Automations to Configure</p>
+</div>
+
+<div class="container">
+
+  <!-- Custom Fields Reference -->
+  <div class="summary-box">
+    <h2>Custom Contact Fields (just created via API)</h2>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:0.8rem;">These 4 fields now exist in GHL and match the merge tags used in all email templates.</p>
+    <table class="fields-table">
+      <tr><th>Field Name</th><th>Merge Tag in Emails</th><th>Used In</th></tr>
+      <tr><td>Preferred Tour Time</td><td><code>{{contact.preferred_time}}</code></td><td>v2-01 Tour Requested, v2-02 Prep</td></tr>
+      <tr><td>Calendly URL</td><td><code>{{contact.calendly_url}}</code></td><td>v2-01 Tour Requested</td></tr>
+      <tr><td>Guide Link</td><td><code>{{contact.guide_link}}</code></td><td>v1-06 Guide Delivery, v1-07, v1-08</td></tr>
+      <tr><td>Google Review Link</td><td><code>{{contact.google_review_link}}</code></td><td>v1-14, v1-15 Review emails</td></tr>
+    </table>
+    <div class="note" style="margin-top:0.8rem;">
+      <strong>Map these in your Book-a-Tour form:</strong> The <em>Preferred Tour Time</em> field should map to the form's time-preference field so the value populates automatically when a prospect submits.
+    </div>
+  </div>
+
+  <!-- WORKFLOW 1 -->
+  <div class="workflow">
+    <div class="workflow-header">
+      <div class="wf-num">1</div>
+      <h3>MSS — Tour Form Submitted</h3>
+      <span class="badge">Immediate</span>
+    </div>
+    <div class="workflow-body">
+      <div class="step-section">
+        <h4>Navigate To</h4>
+        <div class="nav-path">Automations <span>›</span> Workflows <span>›</span> + New Workflow <span>›</span> Start from Scratch</div>
+        <p style="font-size:0.85rem;color:#555;">Name it: <code>MSS — Tour Form Submitted</code></p>
+      </div>
+      <div class="step-section">
+        <h4>Trigger</h4>
+        <ol>
+          <li>Click <strong>+ Add Trigger</strong></li>
+          <li>Select <strong>Form Submitted</strong></li>
+          <li>Under <em>Form</em>, select your <strong>Book a Tour</strong> form</li>
+          <li>Save trigger</li>
+        </ol>
+      </div>
+      <div class="step-section">
+        <h4>Actions (in order)</h4>
+        <div class="action-chain">
+          <div class="action-step">
+            <div class="action-icon">1</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v2 - 01 Tour Requested</code><br>
+              From Name: <em>My Salon Suite Blaine</em> &nbsp;|&nbsp; From Email: <em>scleveland@mysalonsuite.com</em>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon tag">2</div>
+            <div class="action-text">
+              <strong>Add Tag</strong>
+              Tag: <code>tour-requested</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">3</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              3 days (72 hours)
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">4</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 03 Profit Visualization</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">5</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              4 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">6</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 04 Brand Freedom</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">7</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              4 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">8</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 05 Lead Nurture Community</code>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Publishing:</strong> Set status to <em>Published</em> when your Book-a-Tour form is connected to your live landing page. Test first with a fake submission.
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW 2 -->
+  <div class="workflow">
+    <div class="workflow-header">
+      <div class="wf-num">2</div>
+      <h3>MSS — Tour Preparation (24h Reminder)</h3>
+      <span class="badge">24h Before Appointment</span>
+    </div>
+    <div class="workflow-body">
+      <div class="step-section">
+        <h4>Navigate To</h4>
+        <div class="nav-path">Automations <span>›</span> Workflows <span>›</span> + New Workflow <span>›</span> Start from Scratch</div>
+        <p style="font-size:0.85rem;color:#555;">Name it: <code>MSS — Tour Preparation (24h)</code></p>
+      </div>
+      <div class="step-section">
+        <h4>Trigger</h4>
+        <ol>
+          <li>Click <strong>+ Add Trigger</strong></li>
+          <li>Select <strong>Appointment Status</strong></li>
+          <li>Status: <strong>Confirmed</strong></li>
+          <li>Save trigger</li>
+        </ol>
+        <div class="note">
+          Alternatively, use <strong>Appointment Date</strong> trigger set to <em>1 day before</em> the appointment start time.
+        </div>
+      </div>
+      <div class="step-section">
+        <h4>Actions (in order)</h4>
+        <div class="action-chain">
+          <div class="action-step">
+            <div class="action-icon wait">1</div>
+            <div class="action-text">
+              <strong>Wait Until</strong>
+              24 hours before appointment start time<br>
+              <em>(Use "Wait until relative time" → Appointment Date → minus 24h)</em>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">2</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v2 - 02 Tour Preparation</code><br>
+              This sends address, parking info, and what to expect.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW 3 -->
+  <div class="workflow">
+    <div class="workflow-header">
+      <div class="wf-num">3</div>
+      <h3>MSS — Post-Tour, No Booking (Day After)</h3>
+      <span class="badge">24h After Tour</span>
+    </div>
+    <div class="workflow-body">
+      <div class="step-section">
+        <h4>Navigate To</h4>
+        <div class="nav-path">Automations <span>›</span> Workflows <span>›</span> + New Workflow <span>›</span> Start from Scratch</div>
+        <p style="font-size:0.85rem;color:#555;">Name it: <code>MSS — Post-Tour No Booking</code></p>
+      </div>
+      <div class="step-section">
+        <h4>Trigger</h4>
+        <ol>
+          <li>Click <strong>+ Add Trigger</strong></li>
+          <li>Select <strong>Appointment Status</strong></li>
+          <li>Status: <strong>Completed</strong> (or <em>Showed</em>)</li>
+          <li>Save trigger</li>
+        </ol>
+      </div>
+      <div class="step-section">
+        <h4>Actions (in order)</h4>
+        <div class="action-chain">
+          <div class="action-step">
+            <div class="action-icon wait">1</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              24 hours
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon cond">2</div>
+            <div class="action-text">
+              <strong>If/Else Condition</strong>
+              Check if tag <code>lease-signed</code> exists<br>
+              <em>If YES → Stop (they already booked)</em><br>
+              <em>If NO → continue to next action</em>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">3</div>
+            <div class="action-text">
+              <strong>Send Email (NO branch only)</strong>
+              Template: <code>MSS v2 - 03 Profit Visualization</code><br>
+              Subject: <em>What could you really earn, {{contact.first_name}}?</em>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">4</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              4 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">5</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 09 Evergreen Security</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">6</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              5 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">7</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 11 Evergreen Client Experience</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">8</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              5 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">9</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 13 Evergreen Final Push</code>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Stop trigger:</strong> Add a workflow goal or stop event tied to the <code>lease-signed</code> tag. When that tag is added (i.e. they sign), the contact exits this workflow automatically.
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW 4 -->
+  <div class="workflow">
+    <div class="workflow-header">
+      <div class="wf-num">4</div>
+      <h3>MSS — Member Onboarding</h3>
+      <span class="badge">New Member / Lease Signed</span>
+    </div>
+    <div class="workflow-body">
+      <div class="step-section">
+        <h4>Navigate To</h4>
+        <div class="nav-path">Automations <span>›</span> Workflows <span>›</span> + New Workflow <span>›</span> Start from Scratch</div>
+        <p style="font-size:0.85rem;color:#555;">Name it: <code>MSS — Member Onboarding</code></p>
+      </div>
+      <div class="step-section">
+        <h4>Trigger</h4>
+        <ol>
+          <li>Click <strong>+ Add Trigger</strong></li>
+          <li>Select <strong>Tag Added</strong></li>
+          <li>Tag: <code>lease-signed</code></li>
+          <li>Save trigger</li>
+        </ol>
+        <div class="note">
+          When Stacey marks a member as signed, she adds the <code>lease-signed</code> tag to their GHL contact. That fires this workflow instantly.
+        </div>
+      </div>
+      <div class="step-section">
+        <h4>Actions (in order)</h4>
+        <div class="action-chain">
+          <div class="action-step">
+            <div class="action-icon">1</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v2 - 00 Member Onboarding</code><br>
+              Contains: checklist, app downloads, handbook, Facebook group link
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">2</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              7 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">3</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 14 Review Request</code>
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon wait">4</div>
+            <div class="action-text">
+              <strong>Wait</strong>
+              5 days
+            </div>
+          </div>
+          <div class="action-step">
+            <div class="action-icon">5</div>
+            <div class="action-text">
+              <strong>Send Email</strong>
+              Template: <code>MSS v1 - 15 Review Google</code>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="todo">
+        <strong>One-time setup:</strong> Create a GHL tag called <code>lease-signed</code> (Contacts → Tags → New Tag). Stacey applies it manually when a lease is executed. Rachel can also create a Pipeline stage that auto-tags on stage change.
+      </div>
+    </div>
+  </div>
+
+  <!-- Pending Items -->
+  <div class="summary-box" style="border-left-color:#5856d6;">
+    <h2 style="color:#5856d6;">Remaining Before Going Live</h2>
+    <ol style="padding-left:1.4rem;">
+      <li style="margin-bottom:0.5rem;font-size:0.9rem;"><strong>Calendly URL</strong> — Once Rachel/Stacey provides it, update template <code>MSS v2 - 01 Tour Requested</code> to replace <code>{{contact.calendly_url}}</code> with the real link (or set it as a default value for the Calendly URL custom field).</li>
+      <li style="margin-bottom:0.5rem;font-size:0.9rem;"><strong>Form field mapping</strong> — In the Book-a-Tour form settings, map the time-preference question to the <em>Preferred Tour Time</em> custom field.</li>
+      <li style="margin-bottom:0.5rem;font-size:0.9rem;"><strong>Create tag <code>lease-signed</code></strong> — Contacts → Tags in GHL.</li>
+      <li style="margin-bottom:0.5rem;font-size:0.9rem;"><strong>Test submission</strong> — Submit the form with a test contact, confirm Workflow 1 fires and email arrives.</li>
+      <li style="font-size:0.9rem;"><strong>Publish workflows</strong> — Once tested, toggle each from Draft → Published.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>
