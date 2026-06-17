@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V3 — My Salon Suite Email Sequence</title>
+    <title>V4 Final — My Salon Suite Email Sequence</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap');
 
@@ -91,6 +91,16 @@
             padding-left: 16px;
         }
 
+        .email-item.pending {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .email-item.pending:hover {
+            background-color: transparent;
+            padding-left: 20px;
+        }
+
         .email-name {
             font-size: 14px;
             font-weight: 500;
@@ -104,6 +114,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            flex-shrink: 0;
         }
 
         .badge.html {
@@ -116,60 +127,10 @@
             color: #666666;
         }
 
-        .badge.v2 {
-            background-color: #F15A29;
-            color: #FFFFFF;
-        }
-
-        .badge.onboarding {
-            background-color: #78CDD1;
-            color: #080001;
-        }
-
-        .badge.v3 {
-            background-color: #2E7D32;
-            color: #FFFFFF;
-        }
-
-        .version-toggle {
-            display: flex;
-            gap: 0;
-            padding: 12px 20px;
-            background-color: #FAFAFB;
-            border-bottom: 1px solid #EEEEEE;
-        }
-
-        .version-toggle button {
-            flex: 1;
-            padding: 8px 0;
-            border: 1px solid #EEEEEE;
-            background: #FFFFFF;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            transition: all 0.2s ease;
-        }
-
-        .version-toggle button:first-child {
-            border-radius: 4px 0 0 4px;
-        }
-
-        .version-toggle button:last-child {
-            border-radius: 0 4px 4px 0;
-        }
-
-        .version-toggle button.active {
-            background-color: #080001;
-            color: #FFFFFF;
-            border-color: #080001;
-        }
-
-        .v1-section, .v2-section, .v3-section {
-            display: block;
+        .badge.pending {
+            background-color: #FFF2EE;
+            color: #F15A29;
+            border: 1px solid #F15A29;
         }
 
         .viewer {
@@ -236,9 +197,7 @@
             background-color: #FFFFFF;
             border: 1px solid #E5E5E5;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            /* Premium shadow */
             border-radius: 8px;
-            /* Matching the email templates */
             width: 100%;
             height: 800px;
             transition: width 0.3s ease;
@@ -246,7 +205,39 @@
 
         iframe.mobile {
             width: 375px;
-            /* iPhone width */
+        }
+
+        .pending-placeholder {
+            display: none;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .pending-placeholder.visible {
+            display: flex;
+        }
+
+        .pending-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .pending-note {
+            background: #FFF2EE;
+            border: 1px solid #F15A29;
+            color: #F15A29;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            max-width: 400px;
         }
     </style>
 </head>
@@ -256,106 +247,9 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
-            <div class="version-badge">V3</div>
+            <div class="version-badge">V4 Final</div>
         </div>
 
-        <div class="version-toggle">
-            <button class="active" id="btn-v1" onclick="showVersion('v1')">v1 Original</button>
-            <button id="btn-v2" onclick="showVersion('v2')">v2 Updated</button>
-            <button id="btn-v3" onclick="showVersion('v3')">v3 Final</button>
-        </div>
-
-        <!-- V3 SECTION -->
-        <div class="v3-section" id="v3-section" style="display:none;">
-            <div class="sidebar-title" style="color:#2E7D32;">v3 — Rachel's June 10 Feedback</div>
-            <ul class="email-list">
-                <li class="email-item" onclick="loadEmail('v3/01-tour-requested-html.html', this)">
-                    <span class="email-name">01. Tour Requested</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/05-lead-nurture-community-html.html', this)">
-                    <span class="email-name">05. Lead Nurture / Community</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/08-guide-tour-push-html.html', this)">
-                    <span class="email-name">08. Guide Tour Push</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/09-evergreen-security-html.html', this)">
-                    <span class="email-name">09. Evergreen Security</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/10-evergreen-decor-text.txt', this)">
-                    <span class="email-name">10. Evergreen Decor</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/11-evergreen-client-exp-html.html', this)">
-                    <span class="email-name">11. VIP Client Experience</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/12-evergreen-tax-benefits-text.txt', this)">
-                    <span class="email-name">12. Tax Benefits (Stride)</span>
-                    <span class="badge v3">v3</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/19-evergreen-no-hidden-fees-text.txt', this)">
-                    <span class="email-name">19. No Hidden Fees</span>
-                    <span class="badge v3">v3</span>
-                </li>
-            </ul>
-            <div class="sidebar-title" style="color:#2E7D32;">NEW — Member Business Resources</div>
-            <ul class="email-list">
-                <li class="email-item" onclick="loadEmail('v3/23-member-resources-tools-html.html', this)">
-                    <span class="email-name">23. Business Tools &amp; Savings</span>
-                    <span class="badge onboarding">NEW</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/24-member-resources-partners-html.html', this)">
-                    <span class="email-name">24. Product Partners &amp; Revenue</span>
-                    <span class="badge onboarding">NEW</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v3/25-member-resources-protection-html.html', this)">
-                    <span class="email-name">25. Health, Wellness &amp; Protection</span>
-                    <span class="badge onboarding">NEW</span>
-                </li>
-            </ul>
-            <div class="sidebar-title" style="color:#2E7D32;">NEW — Community</div>
-            <ul class="email-list">
-                <li class="email-item" onclick="loadEmail('v3/26-community-html.html', this)">
-                    <span class="email-name">26. In Business For Yourself</span>
-                    <span class="badge onboarding">NEW</span>
-                </li>
-            </ul>
-            <div class="sidebar-title" style="color:#888; font-size:11px;">Remaining photo swaps (Arielle, call-box monitor) pending Drive asset access</div>
-        </div>
-
-        <!-- V2 SECTION -->
-        <div class="v2-section" id="v2-section" style="display:none;">
-            <div class="sidebar-title" style="color:#F15A29;">Member Onboarding</div>
-            <ul class="email-list">
-                <li class="email-item" onclick="loadEmail('v2/00-member-onboarding-html.html', this)">
-                    <span class="email-name">00. Member Onboarding</span>
-                    <span class="badge onboarding">NEW</span>
-                </li>
-            </ul>
-            <div class="sidebar-title" style="color:#F15A29;">Tour Sequence — v2</div>
-            <ul class="email-list">
-                <li class="email-item" onclick="loadEmail('v2/01-tour-requested-html.html', this)">
-                    <span class="email-name">01. Tour Requested</span>
-                    <span class="badge v2">v2</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v2/02-tour-preparation-text.txt', this)">
-                    <span class="email-name">02. Tour Preparation</span>
-                    <span class="badge v2">v2</span>
-                </li>
-                <li class="email-item" onclick="loadEmail('v2/03-profit-visualization-html.html', this)">
-                    <span class="email-name">03. Profit Visualization</span>
-                    <span class="badge v2">v2</span>
-                </li>
-            </ul>
-            <div class="sidebar-title" style="color:#888; font-size:11px;">All other sequences unchanged from v1</div>
-        </div>
-
-        <!-- V1 SECTION -->
-        <div class="v1-section" id="v1-section">
         <div class="sidebar-title">Initial Tour Sequence</div>
         <ul class="email-list">
             <li class="email-item active" onclick="loadEmail('01-tour-requested-html.html', this)">
@@ -414,10 +308,6 @@
                 <span class="email-name">12. Tax Benefits</span>
                 <span class="badge text">TEXT</span>
             </li>
-            <li class="email-item" onclick="loadEmail('13-evergreen-final-push-html.html', this)">
-                <span class="email-name">13. Final Check-in</span>
-                <span class="badge html">HTML</span>
-            </li>
             <li class="email-item" onclick="loadEmail('16-evergreen-tech-stack-html.html', this)">
                 <span class="email-name">16. Tech Stack</span>
                 <span class="badge html">HTML</span>
@@ -440,6 +330,38 @@
             </li>
         </ul>
 
+        <div class="sidebar-title">Member Business Resources</div>
+        <ul class="email-list">
+            <li class="email-item pending" onclick="showPending('23. Business Tools &amp; Savings', 'Awaiting Square discount amount + vendor list from Rachel', this)">
+                <span class="email-name">23. Business Tools &amp; Savings</span>
+                <span class="badge pending">Pending</span>
+            </li>
+            <li class="email-item pending" onclick="showPending('24. Product Partners &amp; Revenue', 'Awaiting partner company names + income stream details from Rachel', this)">
+                <span class="email-name">24. Product Partners &amp; Revenue</span>
+                <span class="badge pending">Pending</span>
+            </li>
+            <li class="email-item pending" onclick="showPending('25. Health, Wellness &amp; Protection', 'Awaiting list of health/wellness companies members get access to from Rachel', this)">
+                <span class="email-name">25. Health, Wellness &amp; Protection</span>
+                <span class="badge pending">Pending</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Final Check-In</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('13-evergreen-final-push-html.html', this)">
+                <span class="email-name">13. Final Check-In</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Community</div>
+        <ul class="email-list">
+            <li class="email-item pending" onclick="showPending('26. In Business for Yourself', 'Awaiting Jennifer.png photo from Rachel (Blaine cosmetologist)', this)">
+                <span class="email-name">26. In Business for Yourself</span>
+                <span class="badge pending">Pending</span>
+            </li>
+        </ul>
+
         <div class="sidebar-title">Reactivation Sequence</div>
         <ul class="email-list">
             <li class="email-item" onclick="loadEmail('21-reactivation-timing-text.txt', this)">
@@ -455,7 +377,7 @@
         <div class="sidebar-title">Current Member Sequence</div>
         <ul class="email-list">
             <li class="email-item" onclick="loadEmail('14-review-request-text.txt', this)">
-                <span class="email-name">14. Check-in</span>
+                <span class="email-name">14. Check-In</span>
                 <span class="badge text">TEXT</span>
             </li>
             <li class="email-item" onclick="loadEmail('15-review-google-html.html', this)">
@@ -464,7 +386,6 @@
             </li>
         </ul>
 
-        </div><!-- end v1-section -->
     </div>
 
     <div class="viewer">
@@ -475,8 +396,13 @@
                 <button id="btn-mobile" onclick="setDevice('mobile')">Mobile View</button>
             </div>
         </div>
-        <div class="iframe-container">
+        <div class="iframe-container" id="iframe-container">
             <iframe id="email-frame" src="01-tour-requested-html.html" frameborder="0"></iframe>
+        </div>
+        <div class="pending-placeholder" id="pending-placeholder">
+            <div class="pending-icon">⏳</div>
+            <strong id="pending-title" style="font-size:16px;color:#080001;"></strong>
+            <div class="pending-note" id="pending-note"></div>
         </div>
     </div>
 
@@ -484,9 +410,20 @@
         function loadEmail(filename, element) {
             document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
-            const title = element.querySelector('.email-name').innerText;
-            document.getElementById('current-title').innerText = title;
+            document.getElementById('current-title').innerText = element.querySelector('.email-name').innerText;
             document.getElementById('email-frame').src = filename;
+            document.getElementById('iframe-container').style.display = 'flex';
+            document.getElementById('pending-placeholder').classList.remove('visible');
+        }
+
+        function showPending(name, note, element) {
+            document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('current-title').innerText = name;
+            document.getElementById('iframe-container').style.display = 'none';
+            document.getElementById('pending-title').innerText = name;
+            document.getElementById('pending-note').innerText = note;
+            document.getElementById('pending-placeholder').classList.add('visible');
         }
 
         function setDevice(type) {
@@ -502,21 +439,6 @@
                 btnDesktop.classList.add('active');
                 btnMobile.classList.remove('active');
             }
-        }
-
-        function showVersion(version) {
-            const versions = ['v1', 'v2', 'v3'];
-            versions.forEach(function(v) {
-                const section = document.getElementById(v + '-section');
-                const btn = document.getElementById('btn-' + v);
-                const isActive = (v === version);
-                if (section) section.style.display = isActive ? 'block' : 'none';
-                if (btn) btn.classList.toggle('active', isActive);
-            });
-            // Auto-load first email of the selected version
-            const active = document.getElementById(version + '-section');
-            const first = active ? active.querySelector('.email-item') : null;
-            if (first) first.click();
         }
     </script>
 </body>

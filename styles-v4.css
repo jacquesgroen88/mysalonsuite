@@ -1,0 +1,45 @@
+/* =====================================================================
+   styles-v4.css  —  My Salon Suite Blaine, Version 4
+   Inherits V3 layout/structure. Reverts brand fonts to the original
+   Jost (sans) + Playfair Display (serif) set used in V1/V2.
+   All scoped under body.v4 so V3 remains untouched.
+   ===================================================================== */
+
+/* ---- 1. Font tokens — revert to Jost + Playfair Display ---- */
+body.v4 {
+    --font-serif:  'Playfair Display', Georgia, serif;
+    --font-sans:   'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--font-sans);
+}
+
+/* ---- 2. Headings — remove V3 lowercase treatment, restore title case ---- */
+body.v4 h1,
+body.v4 h2,
+body.v4 h3,
+body.v4 .value-header h2,
+body.v4 .blaine-location-header h2 {
+    font-family: var(--font-serif);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+/* ---- 3. Body copy + UI elements ---- */
+body.v4 p,
+body.v4 .tag,
+body.v4 .btn-primary,
+body.v4 .btn-outline,
+body.v4 input,
+body.v4 select,
+body.v4 label {
+    font-family: var(--font-sans);
+}
+
+/* ---- 4. Serif accent keeps italic treatment ---- */
+body.v4 .serif-accent {
+    font-style: italic;
+    color: var(--primary);
+}
+body.v4 .hero .serif-accent {
+    color: var(--cream);
+}
