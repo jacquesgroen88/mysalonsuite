@@ -43,3 +43,15 @@ body.v4 .serif-accent {
 body.v4 .hero .serif-accent {
     color: var(--cream);
 }
+
+/* ---- 5. Mobile header — clear 2-line announcement banner ---- */
+@media (max-width: 768px) {
+    body.v4 .luxury-header {
+        top: 65px;
+    }
+}
+@media (max-width: 480px) {
+    body.v4 .luxury-header {
+        top: 72px;
+    }
+}
