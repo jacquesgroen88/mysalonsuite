@@ -145,8 +145,10 @@ Used across all v2 emails. Map these in GHL contact fields:
 - **Merrick** — Maintenance Manager. Headshot: `manager-photos/merrick.jpg`
 - **Rachel Kueppers** — Operations Manager. Headshot: `manager-photos/rachel-kueppers.jpg`
 
-### Outstanding Placeholder
-- `{{calendly_url}}` — NOT yet provided. Keep as GHL variable until Calendly URL is supplied.
+### Calendly URLs (confirmed June 2026)
+- **Stacey Cleveland:** https://calendly.com/scleveland-mysalonsuite
+- **Kayley Mundis:** https://calendly.com/kmundis-mysalonsuite
+- These are set as the `{{calendly_url}}` GHL contact field value per manager. Templates use `{{calendly_url}}` — do not hardcode these into email HTML.
 
 ---
 

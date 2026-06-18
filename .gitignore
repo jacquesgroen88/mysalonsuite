@@ -1,0 +1,35 @@
+# Session & tool data
+.claude/
+graphify-out/
+
+# Raw downloads (too large, not needed in repo)
+18 June Download Drop/
+
+# Scripts with embedded credentials or local-only utility
+upload-ghl-emails.ps1
+test-firebase-upload.ps1
+create-v3-ghl.ps1
+create-workflows.ps1
+create-custom-fields.ps1
+
+# Local-only utility scripts (not part of deliverable)
+bulk-update-content.ps1
+check-preview.ps1
+get-template.ps1
+list-all-templates.ps1
+list-custom-fields.ps1
+list-forms.ps1
+list-templates.ps1
+list-templates2.ps1
+list-workflows.ps1
+probe-endpoints.ps1
+test-editor-content.ps1
+test-import.ps1
+test-patch-html.ps1
+test-patch-wait.ps1
+update-v3-photos.ps1
+verify-content.ps1
+verify-content2.ps1
+
+# Misc local-only folders
+v2 update/
