@@ -55,3 +55,30 @@ body.v4 .hero .serif-accent {
         top: 72px;
     }
 }
+
+/* ---- 6. Comparison table — mobile: drop competitor columns, show MSS checklist ---- */
+@media (max-width: 640px) {
+    body.v4 .comparison-table-wrapper {
+        overflow-x: visible;
+        padding: 0.75rem;
+    }
+
+    body.v4 .luxury-table th:nth-child(3),
+    body.v4 .luxury-table th:nth-child(4),
+    body.v4 .luxury-table td:nth-child(3),
+    body.v4 .luxury-table td:nth-child(4) {
+        display: none;
+    }
+
+    body.v4 .luxury-table th,
+    body.v4 .luxury-table td {
+        padding: 1rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    body.v4 .luxury-table td:first-child,
+    body.v4 .luxury-table th:first-child {
+        text-align: left;
+        padding-left: 1rem;
+    }
+}

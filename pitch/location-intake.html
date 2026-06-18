@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSS Location Intake — New Location Onboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #F15A29;
+            --gold: #F9E3B2;
+            --dark: #080001;
+            --mid: #444444;
+            --light: #FAFAFB;
+            --border: #EEEEEE;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER */
+        .header {
+            background: var(--dark);
+            padding: 50px 40px;
+            text-align: center;
+            color: var(--white);
+        }
+        .header img { height: 36px; margin-bottom: 30px; opacity: 0.9; }
+        .header-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 4vw, 40px);
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+        .header p {
+            font-size: 16px;
+            color: #CCCCCC;
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* PROGRESS */
+        .progress-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 40px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+        }
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .progress-step:hover { color: var(--orange); }
+        .progress-step.active { color: var(--orange); }
+        .progress-step .dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+        .progress-step.active .dot { background: var(--orange); color: var(--white); }
+        .progress-sep { color: #CCC; font-size: 12px; }
+
+        /* LAYOUT */
+        .page { max-width: 800px; margin: 0 auto; padding: 60px 40px 100px; }
+
+        /* SECTION */
+        .q-section { margin-bottom: 60px; }
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 30px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--orange);
+        }
+        .section-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .section-label h2 { font-size: 20px; font-weight: 700; }
+        .section-label p { font-size: 13px; color: #888; margin-top: 2px; }
+
+        /* QUESTION */
+        .q { margin-bottom: 28px; }
+        .q-label {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--dark);
+        }
+        .q-note {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .q-required { color: var(--orange); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 12px 14px;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            color: var(--dark);
+            background: var(--white);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(241, 90, 41, 0.08);
+        }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .q-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* FILE UPLOAD */
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 28px;
+            text-align: center;
+            background: var(--white);
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .file-upload:hover { border-color: var(--orange); }
+        .file-upload .upload-icon { font-size: 28px; margin-bottom: 8px; }
+        .file-upload p { font-size: 13px; color: #888; margin: 0; }
+        .file-upload strong { font-size: 14px; color: var(--dark); display: block; margin-bottom: 4px; }
+
+        /* PHOTO CHECKLIST */
+        .photo-checklist { list-style: none; }
+        .photo-checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .photo-checklist li:last-child { border-bottom: none; }
+        .photo-checklist input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 1px;
+            accent-color: var(--orange);
+            flex-shrink: 0;
+        }
+        .photo-checklist .ph-info { flex: 1; }
+        .photo-checklist .ph-name { font-weight: 700; margin-bottom: 2px; }
+        .photo-checklist .ph-desc { font-size: 12px; color: #888; }
+        .photo-checklist .ph-badge {
+            font-size: 10px;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            align-self: flex-start;
+        }
+        .ph-badge.required { background: #FFF2EE; color: var(--orange); border: 1px solid var(--orange); }
+        .ph-badge.optional { background: var(--light); color: #999; border: 1px solid var(--border); }
+
+        /* CALLOUT */
+        .callout {
+            background: #FFF2EE;
+            border-left: 4px solid var(--orange);
+            border-radius: 0 6px 6px 0;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--mid);
+            line-height: 1.6;
+        }
+        .callout strong { color: var(--dark); }
+
+        /* NOTE BLOCK */
+        .note-block {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        /* SUBMIT */
+        .submit-section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .submit-section h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+        .submit-section p { font-size: 14px; color: #888; margin-bottom: 28px; }
+        .btn-submit {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--white);
+            padding: 16px 44px;
+            border-radius: 2px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jost', sans-serif;
+        }
+        .btn-submit:hover { background: #d94e22; }
+
+        /* PRINT STYLES */
+        @media print {
+            .progress-bar { display: none; }
+            .q-section { break-inside: avoid; }
+        }
+
+        @media (max-width: 640px) {
+            .page { padding: 40px 24px 80px; }
+            .header { padding: 40px 24px; }
+            .q-row { grid-template-columns: 1fr; }
+            .progress-bar { padding: 16px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+    <div class="header-eyebrow">New Location Onboarding</div>
+    <h1>Location Intake Questionnaire</h1>
+    <p>Complete this form once per location. Your answers are the only inputs needed to build and launch the full digital marketing system.</p>
+</div>
+
+<div class="progress-bar">
+    <div class="progress-step active"><span class="dot">1</span> Location Details</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">2</span> Manager Profile</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">3</span> Online Presence</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">4</span> Photography</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">5</span> Community</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">6</span> Prospect Experience</div>
+    <span class="progress-sep">›</span>
+    <div class="progress-step"><span class="dot">7</span> GHL Setup</div>
+</div>
+
+<div class="page">
+
+    <!-- SECTION 1: LOCATION DETAILS -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">1</div>
+            <div>
+                <h2>Location Details</h2>
+                <p>Basic information about this My Salon Suite location.</p>
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Location Name <span class="q-required">Required</span></div>
+            <div class="q-note">As it should appear on the landing page and in emails. E.g., "My Salon Suite Blaine" or "My Salon Suite Plymouth"</div>
+            <input type="text" placeholder="My Salon Suite [City]">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Street Address <span class="q-required">Required</span></div>
+            <input type="text" placeholder="1341 113th Ave NE">
+        </div>
+
+        <div class="q-row">
+            <div class="q">
+                <div class="q-label">City <span class="q-required">Required</span></div>
+                <input type="text" placeholder="Blaine">
+            </div>
+            <div class="q">
+                <div class="q-label">State + ZIP <span class="q-required">Required</span></div>
+                <input type="text" placeholder="MN 55434">
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Preferred Geographic Phrase <span class="q-required">Required</span></div>
+            <div class="q-note">Used in email headers and landing page copy to anchor the location. Choose the phrase that matches how prospects search.</div>
+            <input type="text" placeholder="e.g., in Blaine, MN | near Coon Rapids | in Apple Valley">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Desired Landing Page URL / Domain</div>
+            <div class="q-note">If a custom domain is preferred (e.g., mysalonsuiteblaine.com), note it here. Otherwise the page will be hosted on the shared Netlify account.</div>
+            <input type="url" placeholder="mysalonsuite[city].com — or leave blank for Netlify subdomain">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Suite Types Available at This Location <span class="q-required">Required</span></div>
+            <div class="q-note">Check all that apply. Used to tailor the audience tags and professions section on the landing page.</div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Hair / Cosmetology</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Esthetics / Skincare</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Massage Therapy</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Nail Technician</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Barbershop</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Eyelash Tech</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Tattoo Artist</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Med Spa / Injector</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Spa Suite</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:14px;"><input type="checkbox" style="width:16px;height:16px;accent-color:#F15A29;"> Wellness / Other</label>
+            </div>
+        </div>
+
+        <div class="q-row">
+            <div class="q">
+                <div class="q-label">Total Number of Suites</div>
+                <input type="text" placeholder="e.g., 42">
+            </div>
+            <div class="q">
+                <div class="q-label">Currently Available Suites</div>
+                <div class="q-note">Used for urgency/scarcity messaging. Can be updated at launch.</div>
+                <input type="text" placeholder="e.g., 4">
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Any Current Move-In Specials or Promotions</div>
+            <div class="q-note">E.g., "First month free," "Free setup assistance," "No security deposit." Leave blank if none.</div>
+            <textarea placeholder="List any active promotions here..."></textarea>
+        </div>
+    </div>
+
+    <!-- SECTION 2: MANAGER PROFILE -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">2</div>
+            <div>
+                <h2>Manager Profile</h2>
+                <p>The manager's details appear in Email 01 and throughout the tour sequence. All fields feed directly into GHL variables.</p>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Why this matters:</strong> Every email in the tour funnel ends with the manager's face, name, and direct contact info. Prospects book tours because they feel they already know the person they are meeting. These fields make that happen automatically.
+        </div>
+
+        <div class="q-row">
+            <div class="q">
+                <div class="q-label">Manager Full Name <span class="q-required">Required</span></div>
+                <input type="text" placeholder="e.g., Stacey Cleveland">
+            </div>
+            <div class="q">
+                <div class="q-label">Manager Title <span class="q-required">Required</span></div>
+                <input type="text" placeholder="e.g., Member Relationship Manager">
+            </div>
+        </div>
+
+        <div class="q-row">
+            <div class="q">
+                <div class="q-label">Manager Direct Phone <span class="q-required">Required</span></div>
+                <input type="tel" placeholder="612-429-6360">
+            </div>
+            <div class="q">
+                <div class="q-label">Manager Email Address <span class="q-required">Required</span></div>
+                <input type="email" placeholder="name@mysalonsuite.com">
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Manager Calendly URL <span class="q-required">Required</span></div>
+            <div class="q-note">The direct link to this manager's Calendly page for self-scheduling a tour. Used as the primary CTA in Email 01.</div>
+            <input type="url" placeholder="https://calendly.com/[manager-handle]">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Manager Headshot Photo <span class="q-required">Required</span></div>
+            <div class="q-note">Professional headshot. JPEG or PNG, minimum 400x400px. Will be hosted and used as &#123;&#123;manager_photo_url&#125;&#125; in GHL.</div>
+            <div class="file-upload">
+                <div class="upload-icon">📸</div>
+                <strong>Upload Manager Headshot</strong>
+                <p>Drag and drop, or click to select. JPG or PNG preferred.</p>
+                <input type="file" accept="image/*" style="display:none">
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Short Manager Bio (Optional)</div>
+            <div class="q-note">2-3 sentences. Used to personalize the intro paragraph in Email 01 if desired. E.g., "Stacey has been with My Salon Suite since 2019 and loves helping beauty professionals take their first step into ownership."</div>
+            <textarea placeholder="Optional — leave blank to use the standard intro copy."></textarea>
+        </div>
+    </div>
+
+    <!-- SECTION 3: ONLINE PRESENCE -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">3</div>
+            <div>
+                <h2>Online Presence</h2>
+                <p>Links that appear in emails and connect prospects and members to your community.</p>
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Location Facebook Page URL <span class="q-required">Required</span></div>
+            <div class="q-note">The public Facebook page for this location. E.g., https://www.facebook.com/mysalonsuiteblaine</div>
+            <input type="url" placeholder="https://www.facebook.com/mysalonsuite[city]">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Member Facebook Group URL <span class="q-required">Required</span></div>
+            <div class="q-note">The private Facebook Group for current members at this location. Used in the community email (Email 26). This is the &#123;&#123;facebook_group_url&#125;&#125; GHL variable.</div>
+            <input type="url" placeholder="https://www.facebook.com/groups/...">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Google Business Profile Review Link <span class="q-required">Required</span></div>
+            <div class="q-note">The direct link that opens the Google review dialog for this location. Used in Email 15 (Review Request). To find it: search the location on Google Maps, click "Write a review," and copy the URL.</div>
+            <input type="url" placeholder="https://g.page/r/[location-id]/review">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Instagram Profile URL (Optional)</div>
+            <input type="url" placeholder="https://www.instagram.com/mysalonsuite[city]">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Existing Location Website URL (Optional)</div>
+            <div class="q-note">If the location already has a website or a page on mysalonsuite.com, note it here for reference.</div>
+            <input type="url" placeholder="https://www.mysalonsuite.com/locations/[city]">
+        </div>
+    </div>
+
+    <!-- SECTION 4: PHOTOGRAPHY -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">4</div>
+            <div>
+                <h2>Location Photography</h2>
+                <p>Photos appear on the landing page, in email hero banners, and in the gallery section. Real photos outperform stock every time.</p>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>File guidance:</strong> JPEG or PNG. Minimum 1200px wide for landing page use. Landscape orientation preferred for hero banners. Portrait orientation acceptable for gallery cards. Google Drive shared folder links are fine — no need to send individual files.
+        </div>
+
+        <div class="q">
+            <div class="q-label">Google Drive Folder Link (Preferred)</div>
+            <div class="q-note">If your photos are already in a shared Drive folder, paste the link here and we will pull what we need.</div>
+            <input type="url" placeholder="https://drive.google.com/drive/folders/...">
+        </div>
+
+        <div class="q" style="margin-top: 30px;">
+            <div class="q-label">Photo Checklist — Mark What You Have</div>
+            <div class="q-note">Check off photos you can provide. Required photos are needed to launch. Optional photos enrich the gallery and before/after section.</div>
+            <ul class="photo-checklist">
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Storefront / Exterior</div>
+                        <div class="ph-desc">Outside of the building or suite entrance. Used in the gallery and Blaine location section.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Lobby / Reception Area</div>
+                        <div class="ph-desc">The common area or entry point that clients see when they walk in. Used as a hero banner in Email 23.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Decorated Salon Suite (at least 2 examples)</div>
+                        <div class="ph-desc">Member-styled suites showing what the space can look like. Key for aspirational appeal.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Blank / Empty Suite</div>
+                        <div class="ph-desc">An unstyled suite showing the raw canvas. Important for prospects imagining their own setup.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Hallway / Corridor</div>
+                        <div class="ph-desc">The interior hallway. Helps prospects visualize the layout and sense of community between suites.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Client Lounge or Waiting Area</div>
+                        <div class="ph-desc">Where clients wait before appointments. Reinforces the premium, private experience narrative.</div>
+                    </div>
+                    <span class="ph-badge required">Required</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Spa Suite (if applicable)</div>
+                        <div class="ph-desc">A suite configured for esthetics, massage, or wellness use. Used to appeal to non-hair professionals.</div>
+                    </div>
+                    <span class="ph-badge optional">Optional</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Security / Access System</div>
+                        <div class="ph-desc">The ButterflyMX call box or entry keypad. Used in Email 09 (Security Benefit).</div>
+                    </div>
+                    <span class="ph-badge optional">Optional</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Before / After Suite Transformations (up to 6 pairs)</div>
+                        <div class="ph-desc">Paired before/after photos of suites that members have styled. Used in the landing page slider section. Each pair needs a "before" (blank) and "after" (decorated) shot of the same space.</div>
+                    </div>
+                    <span class="ph-badge optional">Optional</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Community / Event Photos</div>
+                        <div class="ph-desc">Members gathered in the hallway, at a location event, or celebrating a milestone. Used in the reactivation and community emails.</div>
+                    </div>
+                    <span class="ph-badge optional">Optional</span>
+                </li>
+                <li>
+                    <input type="checkbox">
+                    <div class="ph-info">
+                        <div class="ph-name">Member in Their Suite (with permission)</div>
+                        <div class="ph-desc">A member working in their styled space. Used in Email 08 (Tour Push). Get written permission from the member before sharing.</div>
+                    </div>
+                    <span class="ph-badge optional">Optional</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 5: COMMUNITY -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">5</div>
+            <div>
+                <h2>Community and Social Proof</h2>
+                <p>The testimonial in Email 05 and the Site Leader profile in Email 26 are the two highest-trust touchpoints in the sequence.</p>
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Member Testimonial <span class="q-required">Required</span></div>
+            <div class="q-note">One real quote from a current member at this location. 2-4 sentences. Include the member's first name and profession. Get their written permission to use it.</div>
+            <textarea placeholder="e.g., &quot;I spent seven years splitting my commissions with someone else's salon. Moving to My Salon Suite was the best business decision I ever made. I set my own hours, keep everything I earn, and my clients love the privacy. I only wish I had done it sooner.&quot; — Melissa, Hair Stylist"></textarea>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Member Name and Profession (for testimonial credit)</div>
+            <div class="q-row" style="margin-top:8px;">
+                <input type="text" placeholder="First name only — e.g., Melissa">
+                <input type="text" placeholder="Profession — e.g., Hair Stylist">
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border);">
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 6px;">Site Leader Profile</h3>
+            <p style="font-size: 14px; color: #888; margin-bottom: 24px;">The Site Leader is featured in Email 26 (Community Welcome). They are the established member who acts as the community anchor — someone new members can connect with. If your location does not currently have a designated Site Leader, the manager can fill this role temporarily.</p>
+
+            <div class="q-row">
+                <div class="q">
+                    <div class="q-label">Site Leader Full Name <span class="q-required">Required</span></div>
+                    <input type="text" placeholder="e.g., Jennifer Carlson">
+                </div>
+                <div class="q">
+                    <div class="q-label">Site Leader Profession / Suite Type</div>
+                    <input type="text" placeholder="e.g., Cosmetologist, Suite 12">
+                </div>
+            </div>
+
+            <div class="q">
+                <div class="q-label">Site Leader Bio <span class="q-required">Required</span></div>
+                <div class="q-note">2-3 sentences. Their story, how long they have been at MSS, and why they love the community. Written in third person.</div>
+                <textarea placeholder="e.g., Jennifer has been a cosmetologist for 12 years and a My Salon Suite member since 2024. She made the move from a commission salon and has never looked back. She hosts occasional member meetups and is always happy to show a new member around."></textarea>
+            </div>
+
+            <div class="q">
+                <div class="q-label">Site Leader Headshot Photo <span class="q-required">Required</span></div>
+                <div class="q-note">Professional or high-quality casual photo. JPEG or PNG. Minimum 400x400px.</div>
+                <div class="file-upload">
+                    <div class="upload-icon">📸</div>
+                    <strong>Upload Site Leader Photo</strong>
+                    <p>Or include in the Google Drive folder from Section 4.</p>
+                    <input type="file" accept="image/*" style="display:none">
+                </div>
+            </div>
+
+            <div class="q">
+                <div class="q-label">Site Leader Member Since (Year)</div>
+                <input type="text" placeholder="e.g., 2024" style="max-width: 200px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 6: PROSPECT EXPERIENCE -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">6</div>
+            <div>
+                <h2>Prospect Experience</h2>
+                <p>These details go into the tour preparation email (Email 02) — the text message sent 24 hours before every tour.</p>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Email 02 is text-only and highly personal.</strong> It reads like a message from the manager directly. The more specific and practical the details, the more confident the prospect feels walking in.
+        </div>
+
+        <div class="q">
+            <div class="q-label">Parking Instructions <span class="q-required">Required</span></div>
+            <div class="q-note">Where should prospects park when they arrive? Any specific lot, entrance, or things to avoid?</div>
+            <textarea placeholder="e.g., Pull into the main parking lot off 113th Ave. There is always parking directly in front of the building. Look for the My Salon Suite sign above the entrance."></textarea>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Entry Instructions <span class="q-required">Required</span></div>
+            <div class="q-note">How does a prospect get inside? Do they buzz in, call the manager, or is there a code? Include the ButterflyMX call box number if applicable.</div>
+            <textarea placeholder="e.g., When you arrive, use the call box at the front door and dial [number] to reach me directly. I will buzz you in right away."></textarea>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Anything Else Prospects Should Know Before Arriving</div>
+            <div class="q-note">Any details that would make the arrival experience smoother. Optional — leave blank if nothing else is needed.</div>
+            <textarea placeholder="e.g., The suite tour takes about 30-45 minutes. Feel free to bring your portfolio or any inspiration photos if you have them."></textarea>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Location Access Hours</div>
+            <div class="q-note">When can members access the building? Used in Email 09 (Security and Access).</div>
+            <input type="text" placeholder="e.g., 6:00 AM to 10:00 PM, 7 days a week">
+        </div>
+    </div>
+
+    <!-- SECTION 7: GHL SETUP -->
+    <div class="q-section">
+        <div class="section-label">
+            <div class="section-num">7</div>
+            <div>
+                <h2>GoHighLevel Setup</h2>
+                <p>Technical details needed to load the email sequence into the correct GHL sub-account and configure the form connection.</p>
+            </div>
+        </div>
+
+        <div class="q">
+            <div class="q-label">GHL Sub-Account Name</div>
+            <div class="q-note">The name of this location's sub-account inside GoHighLevel. If you are unsure, ask the operations team.</div>
+            <input type="text" placeholder="e.g., My Salon Suite - Blaine">
+        </div>
+
+        <div class="q">
+            <div class="q-label">GHL Sub-Account Email (Login / Admin Email)</div>
+            <input type="email" placeholder="e.g., blaine@mysalonsuite.com">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Existing Lead Tags or Pipeline Stages to Integrate With</div>
+            <div class="q-note">If this location already has GHL tags, pipelines, or workflows, list them here so the new sequence can be connected without disrupting existing setup.</div>
+            <textarea placeholder="e.g., Tag: Tour Requested | Pipeline: Suite Prospects | Stage: Tour Booked"></textarea>
+        </div>
+
+        <div class="q">
+            <div class="q-label">Preferred Sender Name in GHL</div>
+            <div class="q-note">The name that appears in the "From" field of every email. Typically the manager's name.</div>
+            <input type="text" placeholder="e.g., Stacey at My Salon Suite">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Preferred Sender Email in GHL</div>
+            <div class="q-note">The from-address for all outgoing emails. Usually the manager's email or a location alias.</div>
+            <input type="email" placeholder="e.g., scleveland@mysalonsuite.com">
+        </div>
+
+        <div class="q">
+            <div class="q-label">Additional Notes for the Build Team</div>
+            <div class="q-note">Anything else that would help configure this location's system correctly. Access restrictions, existing automations, preferences, or questions.</div>
+            <textarea placeholder="Optional — any additional context for the setup team."></textarea>
+        </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+        <h3>Ready to Submit?</h3>
+        <p>Once submitted, we will begin the build within 3 business days. Expect a review link within two weeks so the manager can approve the landing page and email sequence before launch.</p>
+        <button class="btn-submit" onclick="alert('In the live version, this submits to the build team. For now, save this form as a PDF or email it to jacques@jcemedia.com.')">Submit Intake Form</button>
+        <div class="note-block" style="margin-top: 24px; text-align: left;">
+            <strong>Alternatively:</strong> Print this page (File › Print or Cmd/Ctrl+P) and complete it by hand, or email your answers directly to <strong>jacques@jcemedia.com</strong> with the subject line "MSS Location Intake — [City Name]."
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

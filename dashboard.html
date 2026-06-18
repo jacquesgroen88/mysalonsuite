@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Salon Suite Blaine — Project Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #F15A29;
+            --gold:   #F9E3B2;
+            --dark:   #080001;
+            --mid:    #555555;
+            --light:  #FAFAFB;
+            --border: #EEEEEE;
+            --white:  #FFFFFF;
+            --green:  #22C55E;
+            --blue:   #3730A3;
+            --amber:  #F59E0B;
+            --muted:  #999999;
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ─── HEADER ─────────────────────────────────────────── */
+        .header {
+            background: var(--dark);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .header img { height: 28px; }
+        .header-divider { width: 1px; height: 24px; background: #333; }
+        .header-title { font-size: 14px; font-weight: 600; color: #CCC; }
+        .header-right { display: flex; align-items: center; gap: 12px; }
+        .live-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        .live-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--orange);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .header-btn:hover { background: #d94e22; }
+
+        /* ─── HERO ───────────────────────────────────────────── */
+        .hero {
+            background: var(--dark);
+            padding: 60px 40px 50px;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 80% 50%, rgba(241,90,41,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-style: italic;
+            line-height: 1.2;
+            margin-bottom: 14px;
+            max-width: 640px;
+        }
+        .hero p { font-size: 16px; color: #AAA; max-width: 560px; line-height: 1.7; margin-bottom: 36px; }
+
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+        .hero-cta.primary { background: var(--orange); color: var(--white); }
+        .hero-cta.primary:hover { background: #d94e22; }
+        .hero-cta.secondary { background: rgba(255,255,255,0.08); color: var(--white); border: 1px solid rgba(255,255,255,0.15); }
+        .hero-cta.secondary:hover { background: rgba(255,255,255,0.13); }
+
+        /* ─── CONTENT ────────────────────────────────────────── */
+        .content { max-width: 1200px; margin: 0 auto; padding: 56px 40px 80px; }
+
+        /* ─── SECTION LABEL ──────────────────────────────────── */
+        .section-header { margin-bottom: 24px; }
+        .section-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+        .section-header p { font-size: 14px; color: var(--muted); }
+        .section-sep { border: none; border-top: 1px solid var(--border); margin: 52px 0 48px; }
+
+        /* ─── GRID ───────────────────────────────────────────── */
+        .card-grid { display: grid; gap: 16px; }
+        .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        /* ─── CARD ───────────────────────────────────────────── */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            border-color: #DDD;
+            transform: translateY(-1px);
+        }
+        .card.active-card { border-color: var(--orange); }
+        .card.active-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--orange);
+        }
+
+        .card-icon { font-size: 26px; margin-bottom: 14px; }
+        .card-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .card-desc { font-size: 13px; color: var(--mid); line-height: 1.6; flex: 1; margin-bottom: 18px; }
+
+        .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--orange);
+            transition: gap 0.15s;
+        }
+        .card-link:hover { gap: 9px; }
+        .card-link .arrow { font-size: 14px; }
+
+        /* ─── BADGES ─────────────────────────────────────────── */
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        .badge.live    { background: rgba(34,197,94,0.12);  color: #16a34a; border: 1px solid rgba(34,197,94,0.25); }
+        .badge.v4      { background: rgba(55,48,163,0.1);   color: var(--blue); border: 1px solid rgba(55,48,163,0.2); }
+        .badge.ref     { background: var(--light);           color: var(--muted); border: 1px solid var(--border); }
+        .badge.new     { background: rgba(241,90,41,0.1);   color: var(--orange); border: 1px solid rgba(241,90,41,0.2); }
+        .badge.draft   { background: rgba(245,158,11,0.1);  color: #b45309; border: 1px solid rgba(245,158,11,0.2); }
+
+        /* ─── LANDING PAGE CARDS ─────────────────────────────── */
+        .lp-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; }
+
+        /* ─── STATS BAR ──────────────────────────────────────── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 52px;
+        }
+        .stat-cell {
+            background: var(--white);
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .stat-cell .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .stat-cell .lbl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ─── VERSION TABLE ──────────────────────────────────── */
+        .ver-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .ver-table th {
+            text-align: left;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            border-bottom: 2px solid var(--border);
+        }
+        .ver-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            color: var(--mid);
+        }
+        .ver-table td:first-child { font-weight: 700; color: var(--dark); }
+        .ver-table tr:last-child td { border-bottom: none; }
+        .ver-table .open-link {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--orange);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .ver-table .open-link:hover { text-decoration: underline; }
+
+        /* ─── EMAIL SEQUENCES ────────────────────────────────── */
+        .email-seq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* ─── FUNNEL PILLS ───────────────────────────────────── */
+        .funnel-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .funnel-pill {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--light);
+            color: var(--mid);
+            border: 1px solid var(--border);
+        }
+
+        /* ─── QUICK LINKS ────────────────────────────────────── */
+        .quick-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .quick-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 18px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.15s;
+        }
+        .quick-link:hover { border-color: var(--orange); color: var(--orange); background: #FFF2EE; }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .lp-grid { grid-template-columns: 1fr 1fr; }
+            .stats-bar { grid-template-columns: repeat(3, 1fr); }
+            .card-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .header { padding: 0 20px; }
+            .header-title { display: none; }
+            .hero { padding: 40px 20px; }
+            .content { padding: 40px 20px 60px; }
+            .lp-grid { grid-template-columns: 1fr; }
+            .card-grid.cols-2,
+            .card-grid.cols-3,
+            .card-grid.cols-4 { grid-template-columns: 1fr; }
+            .email-seq-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────────────────────── -->
+<header class="header">
+    <div class="header-left">
+        <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        <div class="header-divider"></div>
+        <span class="header-title">Blaine — Project Dashboard</span>
+    </div>
+    <div class="header-right">
+        <span class="live-pill"><span class="live-dot"></span>V4 Live</span>
+        <a href="index-v4.html" target="_blank" class="header-btn">Open Live Page ↗</a>
+    </div>
+</header>
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">My Salon Suite — Blaine, MN</div>
+        <h1>Digital Marketing System</h1>
+        <p>Landing page, 26-email nurture sequence, and rollout pitch — all in one place. Navigate to any asset below.</p>
+        <div class="hero-actions">
+            <a href="index-v4.html" target="_blank" class="hero-cta primary">Live Landing Page ↗</a>
+            <a href="email/index.html" target="_blank" class="hero-cta secondary">Email Viewer ↗</a>
+            <a href="pitch/corporate-pitch.html" target="_blank" class="hero-cta secondary">Rollout Pitch ↗</a>
+        </div>
+    </div>
+</div>
+
+<!-- ─── CONTENT ───────────────────────────────────────────────── -->
+<div class="content">
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-cell"><div class="num">4</div><div class="lbl">LP Versions</div></div>
+        <div class="stat-cell"><div class="num">26</div><div class="lbl">Emails Built</div></div>
+        <div class="stat-cell"><div class="num">4</div><div class="lbl">Email Funnels</div></div>
+        <div class="stat-cell"><div class="num">9</div><div class="lbl">GHL Variables</div></div>
+        <div class="stat-cell"><div class="num">2</div><div class="lbl">Managers Wired</div></div>
+    </div>
+
+    <!-- LANDING PAGES -->
+    <div class="section-header">
+        <h2>Landing Pages</h2>
+        <p>Four versions built across the project. V4 is live. V1 is the frozen reference baseline.</p>
+    </div>
+
+    <table class="ver-table" style="background:var(--white); border:1px solid var(--border); border-radius:10px; overflow:hidden;">
+        <thead>
+            <tr>
+                <th>Version</th>
+                <th>Status</th>
+                <th>Key Changes</th>
+                <th>Open</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background: #FFFAF8;">
+                <td>V4 — Final</td>
+                <td><span class="badge live">Live</span> <span class="badge v4">Current</span></td>
+                <td>Jost + Playfair fonts, V4 serif headline treatment, mobile header fix, full gallery</td>
+                <td><a href="index-v4.html" target="_blank" class="open-link">Open ↗</a></td>
+            </tr>
+            <tr>
+                <td>V3</td>
+                <td><span class="badge ref">Reference</span></td>
+                <td>Dark theme exploration, lowercase headings, before/after sliders</td>
+                <td><a href="index-v3.html" target="_blank" class="open-link">Open ↗</a></td>
+            </tr>
+            <tr>
+                <td>V2</td>
+                <td><span class="badge ref">Reference</span></td>
+                <td>Blaine 3-card section, filtered gallery, USP updates, real suite photos</td>
+                <td><a href="index-v2.html" target="_blank" class="open-link">Open ↗</a></td>
+            </tr>
+            <tr>
+                <td>V2 Direct Response</td>
+                <td><span class="badge ref">Preserved</span></td>
+                <td>Alternate direct-response copy variant for V2</td>
+                <td><a href="index-v2-direct.html" target="_blank" class="open-link">Open ↗</a></td>
+            </tr>
+            <tr>
+                <td>V1 — Original</td>
+                <td><span class="badge ref">Read Only</span></td>
+                <td>Baseline reference — frozen, never modify</td>
+                <td><a href="index.html" target="_blank" class="open-link">Open ↗</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr class="section-sep">
+
+    <!-- EMAIL SEQUENCES -->
+    <div class="section-header">
+        <h2>Email Sequences</h2>
+        <p>26 emails across 4 funnels, all viewable with desktop/mobile toggle.</p>
+    </div>
+
+    <div class="email-seq-grid">
+        <a href="email/index.html" target="_blank" class="card active-card">
+            <div class="card-icon">📬</div>
+            <div class="card-title">All Versions — Email Viewer</div>
+            <div class="card-desc">Compare V1, V2, V3, and V4 side by side. Tabs at the top switch between versions. Desktop and mobile toggle included.</div>
+            <div class="funnel-pills">
+                <span class="funnel-pill">V1 Original</span>
+                <span class="funnel-pill">V2</span>
+                <span class="funnel-pill">V3</span>
+                <span class="funnel-pill badge v4" style="border-radius:20px;">V4 Final</span>
+            </div>
+            <div class="card-footer" style="margin-top:18px;">
+                <span class="badge live">V4 Default</span>
+                <span class="card-link">Open Viewer <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <a href="email/v4/index.html" target="_blank" class="card">
+            <div class="card-icon">✉️</div>
+            <div class="card-title">V4 Standalone Viewer</div>
+            <div class="card-desc">V4-only email viewer. Clean sidebar navigation by funnel sequence with HTML/TEXT badges. Shareable directly with Rachel or new location managers.</div>
+            <div class="funnel-pills">
+                <span class="funnel-pill">Tour (01–05)</span>
+                <span class="funnel-pill">Guide (06–08)</span>
+                <span class="funnel-pill">Evergreen (09–22)</span>
+                <span class="funnel-pill">Member Resources (23–26)</span>
+            </div>
+            <div class="card-footer" style="margin-top:18px;">
+                <span class="badge v4">V4 Final</span>
+                <span class="card-link">Open Viewer <span class="arrow">→</span></span>
+            </div>
+        </a>
+    </div>
+
+    <hr class="section-sep">
+
+    <!-- PITCH & ROLLOUT -->
+    <div class="section-header">
+        <h2>Rollout Pitch &amp; Onboarding</h2>
+        <p>Materials for presenting the system to MSS corporate and onboarding new locations.</p>
+    </div>
+
+    <div class="card-grid cols-2">
+        <a href="pitch/corporate-pitch.html" target="_blank" class="card active-card">
+            <div class="card-icon">📊</div>
+            <div class="card-title">Corporate Rollout Pitch</div>
+            <div class="card-desc">One-pager presenting the problem, the system, what other locations receive, how the GHL variables work, and a 6-step rollout process. Built for Rachel to present to MSS operations.</div>
+            <div class="card-footer">
+                <span class="badge new">New — June 2026</span>
+                <span class="card-link">Open Pitch <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <a href="pitch/location-intake.html" target="_blank" class="card active-card">
+            <div class="card-icon">📋</div>
+            <div class="card-title">New Location Intake Form</div>
+            <div class="card-desc">7-section onboarding questionnaire capturing every input needed to build the system for a new location: manager profile, photos, GHL setup, community contacts, and prospect experience details.</div>
+            <div class="card-footer">
+                <span class="badge new">New — June 2026</span>
+                <span class="card-link">Open Form <span class="arrow">→</span></span>
+            </div>
+        </a>
+    </div>
+
+    <hr class="section-sep">
+
+    <!-- DOCUMENTATION -->
+    <div class="section-header">
+        <h2>Documentation &amp; References</h2>
+        <p>Setup guides and archived materials for the project record.</p>
+    </div>
+
+    <div class="card-grid cols-3">
+        <a href="workflow-setup-guide.html" target="_blank" class="card">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">GHL Workflow Setup Guide</div>
+            <div class="card-desc">Step-by-step guide for loading the email sequence into a GoHighLevel sub-account, mapping variables, and configuring workflow triggers.</div>
+            <div class="card-footer">
+                <span class="badge ref">Reference</span>
+                <span class="card-link">Open <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <a href="pitch.html" target="_blank" class="card">
+            <div class="card-icon">📄</div>
+            <div class="card-title">Original Pitch (V1)</div>
+            <div class="card-desc">The original project proposal document. Superseded by the corporate rollout pitch but preserved for reference.</div>
+            <div class="card-footer">
+                <span class="badge ref">Archived</span>
+                <span class="card-link">Open <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <a href="email/v2/00-member-onboarding-html.html" target="_blank" class="card">
+            <div class="card-icon">🎉</div>
+            <div class="card-title">Member Onboarding Email (V2)</div>
+            <div class="card-desc">Standalone onboarding email for new members who have signed their lease. Checklist, app links, community handbook, and document upload form.</div>
+            <div class="card-footer">
+                <span class="badge ref">V2 Reference</span>
+                <span class="card-link">Open <span class="arrow">→</span></span>
+            </div>
+        </a>
+    </div>
+
+    <hr class="section-sep">
+
+    <!-- QUICK LINKS -->
+    <div class="section-header">
+        <h2>Quick Links</h2>
+        <p>External resources and live services used in this project.</p>
+    </div>
+
+    <div class="quick-links">
+        <a href="https://mysalonsuite.netlify.app" target="_blank" class="quick-link">🌐 mysalonsuite.netlify.app</a>
+        <a href="https://mysalonsuiteblaine.com" target="_blank" class="quick-link">🔗 mysalonsuiteblaine.com</a>
+        <a href="https://calendly.com/scleveland-mysalonsuite" target="_blank" class="quick-link">📅 Stacey's Calendly</a>
+        <a href="https://calendly.com/kmundis-mysalonsuite" target="_blank" class="quick-link">📅 Kayley's Calendly</a>
+        <a href="https://www.facebook.com/mysalonsuiteblaine" target="_blank" class="quick-link">📘 Facebook — Blaine</a>
+        <a href="https://www.mysalonsuite.com/profit-calculator/" target="_blank" class="quick-link">🧮 Profit Calculator</a>
+        <a href="https://canva.link/cjbgkqr3nyyymdc" target="_blank" class="quick-link">📖 Community Handbook</a>
+        <a href="https://canva.link/4kmecnnm2pcobkj" target="_blank" class="quick-link">📁 Virtual Leasing Folder</a>
+        <a href="https://github.com/jacquesgroen88/mysalonsuite" target="_blank" class="quick-link">💾 GitHub Repo</a>
+    </div>
+
+</div>
+
+</body>
+</html>
