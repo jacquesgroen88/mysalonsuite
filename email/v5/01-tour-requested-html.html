@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Requested - My Salon Suite Blaine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+
+        body {
+            font-family: 'Jost', Helvetica, Arial, sans-serif;
+            background-color: #FAFAFB;
+            margin: 0;
+            padding: 0;
+            color: #080001;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+        }
+
+        .top-bar {
+            background-color: #F9E3B2;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #080001;
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .header img {
+            height: 35px;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 250px;
+            background-image: url('https://mysalonsuite.netlify.app/blaine-photos/Decorated%20Salon%20Suite_4.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(8, 0, 1, 0.4);
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 2;
+            padding: 60px 40px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .content h2 {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #F15A29;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #444444;
+        }
+
+        /* Calendly CTA block */
+        .calendly-block {
+            background-color: #F9E3B2;
+            border-radius: 6px;
+            padding: 28px 32px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .calendly-block p {
+            font-size: 15px;
+            font-weight: 600;
+            color: #080001;
+            margin-bottom: 18px;
+        }
+
+        .calendly-block .btn {
+            display: inline-block;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 16px 38px;
+            border-radius: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        /* Manager personalisation block */
+        .manager-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+            background-color: #FAFAFB;
+            border: 1px solid #EEEEEE;
+            border-radius: 6px;
+            padding: 26px 24px;
+            margin-top: 32px;
+        }
+
+        .manager-photo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #E0E0E0;
+        }
+
+        .manager-info p {
+            margin: 0 0 4px 0;
+            font-size: 15px;
+            color: #444;
+            white-space: nowrap;
+        }
+
+        .manager-info strong {
+            font-size: 16px;
+            color: #080001;
+        }
+
+        .manager-info a {
+            color: #F15A29;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .footer {
+            background-color: #FAFAFB;
+            padding: 50px 40px;
+            text-align: center;
+            color: #080001;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .footer img {
+            height: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #666666;
+            margin: 5px 0;
+        }
+
+        .social-links {
+            margin: 25px 0;
+        }
+
+        .social-links a {
+            margin: 0 15px;
+            color: #080001;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">Exclusively for Beauty Professionals in Blaine, MN</div>
+        <div class="header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        </div>
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-text">
+                <h1>The ultimate upgrade <br>for your business.</h1>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Tour Confirmation</h2>
+            <p>Hi {{name}},</p>
+            <p>Thank you for requesting a private tour of My Salon Suite Blaine! We've received your request for the
+                <strong>{{preferred_time}}</strong> window, and we're checking the schedule to make sure we can give you
+                a dedicated, unhurried experience. We'll reach out to you shortly at <strong>{{phone}}</strong> to lock in
+                your exact time and answer any questions about current availability!</p>
+
+            <!-- Calendly scheduling block -->
+            <div class="calendly-block">
+                <p>Skip the wait. Pick a time that works for you right now:</p>
+                <a href="{{calendly_url}}" class="btn">Choose Your Tour Time</a>
+            </div>
+
+            <p>We can't wait to show you how our private, luxury suites can help you keep 100% of your earnings and take
+                total control of your brand!</p>
+
+            <!-- Location manager personalisation -->
+            <div class="manager-block">
+                <img src="https://mysalonsuite.netlify.app/manager-photos/stacey-cleveland.jpg" alt="Stacey Cleveland" class="manager-photo">
+                <div class="manager-info">
+                    <strong>Stacey Cleveland</strong>
+                    <p>Member Relationship Manager</p>
+                    <p>My Salon Suite Blaine</p>
+                    <a href="tel:612-429-6360">612-429-6360</a> &nbsp;|&nbsp;
+                    <a href="mailto:scleveland@mysalonsuite.com">scleveland@mysalonsuite.com</a>
+                </div>
+            </div>
+
+            <div class="btn-wrapper">
+                <a href="https://mysalonsuiteblaine.com/#value" class="btn">Explore The Suites</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <p><strong>My Salon Suite - Blaine</strong></p>
+            <p>Prime Location &bull; Luxury Environment &bull; Total Independence</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/mysalonsuiteblaine">Facebook</a>
+                <a href="https://www.instagram.com/mysalonsuite_mn/">Instagram</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 10px; opacity: 0.4;">&copy; 2026 My Salon Suite. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

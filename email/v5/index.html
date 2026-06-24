@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V4 Final — My Salon Suite Email Sequence</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap');
+
+        body {
+            font-family: 'Jost', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FAFAFB;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            color: #080001;
+        }
+
+        .sidebar {
+            width: 350px;
+            background-color: #FFFFFF;
+            border-right: 1px solid #EEEEEE;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 30px 20px;
+            background-color: #080001;
+            text-align: center;
+        }
+
+        .sidebar-header img {
+            height: 35px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .sidebar-title {
+            padding: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F15A29;
+            border-bottom: 1px solid #EEEEEE;
+            background-color: #FAFAFB;
+        }
+
+        .email-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .email-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #EEEEEE;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .email-item:hover {
+            background-color: #FAFAFB;
+            padding-left: 25px;
+        }
+
+        .email-item.active {
+            background-color: #FFF2EE;
+            border-left: 4px solid #F15A29;
+            padding-left: 16px;
+        }
+
+        .email-item.pending {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .email-item.pending:hover {
+            background-color: transparent;
+            padding-left: 20px;
+        }
+
+        .email-name {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+
+        .badge.html {
+            background-color: #080001;
+            color: #FFFFFF;
+        }
+
+        .badge.text {
+            background-color: #EEEEEE;
+            color: #666666;
+        }
+
+        .badge.pending {
+            background-color: #FFF2EE;
+            color: #F15A29;
+            border: 1px solid #F15A29;
+        }
+
+        .viewer {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #FAFAFB;
+        }
+
+        .viewer-toolbar {
+            height: 60px;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #EEEEEE;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            z-index: 5;
+        }
+
+        .viewer-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #080001;
+        }
+
+        .device-toggles button {
+            background: none;
+            border: 1px solid #EEEEEE;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+            transition: all 0.2s ease;
+            color: #666666;
+        }
+
+        .device-toggles button:hover {
+            border-color: #F15A29;
+            color: #F15A29;
+        }
+
+        .device-toggles button.active {
+            background-color: #F15A29;
+            color: #FFFFFF;
+            border-color: #F15A29;
+        }
+
+        .iframe-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        iframe {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            width: 100%;
+            height: 800px;
+            transition: width 0.3s ease;
+        }
+
+        iframe.mobile {
+            width: 375px;
+        }
+
+        .pending-placeholder {
+            display: none;
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .pending-placeholder.visible {
+            display: flex;
+        }
+
+        .pending-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .pending-note {
+            background: #FFF2EE;
+            border: 1px solid #F15A29;
+            color: #F15A29;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <div class="version-badge">V4 Final</div>
+        </div>
+
+        <div class="sidebar-title">Initial Tour Sequence</div>
+        <ul class="email-list">
+            <li class="email-item active" onclick="loadEmail('01-tour-requested-html.html', this)">
+                <span class="email-name">01. Tour Requested</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('02-tour-preparation-text.txt', this)">
+                <span class="email-name">02. Tour Preparation</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('03-profit-visualization-html.html', this)">
+                <span class="email-name">03. Profit Visualization</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('04-brand-freedom-text.txt', this)">
+                <span class="email-name">04. Brand Freedom</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('05-lead-nurture-community-html.html', this)">
+                <span class="email-name">05. Community Profile</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Guide Delivery Sequence</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('06-guide-delivery-html.html', this)">
+                <span class="email-name">06. Guide Delivery</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('07-guide-followup-text.txt', this)">
+                <span class="email-name">07. Casual Follow Up</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('08-guide-tour-push-html.html', this)">
+                <span class="email-name">08. Tour Push</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Evergreen Sequence</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('09-evergreen-security-html.html', this)">
+                <span class="email-name">09. Security Benefit</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('10-evergreen-decor-text.txt', this)">
+                <span class="email-name">10. Custom Decor</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('11-evergreen-client-exp-html.html', this)">
+                <span class="email-name">11. VIP Client Exp</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('12-evergreen-tax-benefits-text.txt', this)">
+                <span class="email-name">12. Tax Benefits</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('16-evergreen-tech-stack-html.html', this)">
+                <span class="email-name">16. Tech Stack</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('17-evergreen-education-text.txt', this)">
+                <span class="email-name">17. Business Education</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('18-evergreen-all-pros-html.html', this)">
+                <span class="email-name">18. All Professionals</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('19-evergreen-no-hidden-fees-text.txt', this)">
+                <span class="email-name">19. No Hidden Fees</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('20-evergreen-quiz-html.html', this)">
+                <span class="email-name">20. Top Funnel Quiz</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Member Business Resources</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('23-member-tools-savings-html.html', this)">
+                <span class="email-name">23. Business Tools &amp; Savings</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('24-member-product-partners-html.html', this)">
+                <span class="email-name">24. Product Partners &amp; Revenue</span>
+                <span class="badge html">HTML</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('25-member-health-wellness-html.html', this)">
+                <span class="email-name">25. Health, Wellness &amp; Protection</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Final Check-In</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('13-evergreen-final-push-html.html', this)">
+                <span class="email-name">13. Final Check-In</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Community</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('26-community-html.html', this)">
+                <span class="email-name">26. In Business for Yourself</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Reactivation Sequence</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('21-reactivation-timing-text.txt', this)">
+                <span class="email-name">21. Better Timing</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('22-reactivation-whats-new-html.html', this)">
+                <span class="email-name">22. What You Missed</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+        <div class="sidebar-title">Current Member Sequence</div>
+        <ul class="email-list">
+            <li class="email-item" onclick="loadEmail('14-review-request-text.txt', this)">
+                <span class="email-name">14. Check-In</span>
+                <span class="badge text">TEXT</span>
+            </li>
+            <li class="email-item" onclick="loadEmail('15-review-google-html.html', this)">
+                <span class="email-name">15. Review Request</span>
+                <span class="badge html">HTML</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="viewer">
+        <div class="viewer-toolbar">
+            <div class="viewer-title" id="current-title">01. Tour Requested</div>
+            <div class="device-toggles">
+                <button class="active" id="btn-desktop" onclick="setDevice('desktop')">Desktop View</button>
+                <button id="btn-mobile" onclick="setDevice('mobile')">Mobile View</button>
+            </div>
+        </div>
+        <div class="iframe-container" id="iframe-container">
+            <iframe id="email-frame" src="01-tour-requested-html.html" frameborder="0"></iframe>
+        </div>
+        <div class="pending-placeholder" id="pending-placeholder">
+            <div class="pending-icon">⏳</div>
+            <strong id="pending-title" style="font-size:16px;color:#080001;"></strong>
+            <div class="pending-note" id="pending-note"></div>
+        </div>
+    </div>
+
+    <script>
+        function loadEmail(filename, element) {
+            document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('current-title').innerText = element.querySelector('.email-name').innerText;
+            document.getElementById('email-frame').src = filename;
+            document.getElementById('iframe-container').style.display = 'flex';
+            document.getElementById('pending-placeholder').classList.remove('visible');
+        }
+
+        function showPending(name, note, element) {
+            document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('current-title').innerText = name;
+            document.getElementById('iframe-container').style.display = 'none';
+            document.getElementById('pending-title').innerText = name;
+            document.getElementById('pending-note').innerText = note;
+            document.getElementById('pending-placeholder').classList.add('visible');
+        }
+
+        function setDevice(type) {
+            const frame = document.getElementById('email-frame');
+            const btnDesktop = document.getElementById('btn-desktop');
+            const btnMobile = document.getElementById('btn-mobile');
+            if (type === 'mobile') {
+                frame.classList.add('mobile');
+                btnMobile.classList.add('active');
+                btnDesktop.classList.remove('active');
+            } else {
+                frame.classList.remove('mobile');
+                btnDesktop.classList.add('active');
+                btnMobile.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

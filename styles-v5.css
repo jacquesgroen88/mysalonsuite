@@ -1,0 +1,46 @@
+/* =====================================================================
+   styles-v5.css  —  ADDITIVE ONLY  (Rachel 6/18 + 6/22 round)
+   Loaded AFTER styles-v4.css. Never imports/overrides v1–v4 files.
+   Pages keep <body class="v4">, so rules stay scoped to body.v4.
+   Applies to every index-*-v5.html landing page.
+   ===================================================================== */
+
+/* A2 (6/18): "Suite Advantage" photos -> squares, to cut the
+   excessive scroll length Rachel flagged. */
+body.v4 .value-card-luxury .value-img-col img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+}
+
+/* A3 (6/18): clear space between the two suite-transformation sliders.
+   NOTE: the side-by-side grid layout existed only under body.v3; the
+   v4/v5 pages are body.v4, so the two sliders were stacking flush with
+   no gap (exactly what Rachel flagged). This restores side-by-side on
+   desktop and a clear gap when stacked on mobile. */
+body.v4 .before-after-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+body.v4 .before-after-duo .before-after-wrap {
+    max-width: 100%;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    body.v4 .before-after-duo {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* A5 (6/18 + 6/22): crop member / testimonial photos closer on
+   the person's face instead of dead-center. */
+body.v4 .testimonial-row-img {
+    object-fit: cover;
+    object-position: center 28%;
+}
