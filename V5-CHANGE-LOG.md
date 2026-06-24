@@ -138,3 +138,16 @@ Tattoo profession: Blaine omitted (microblading instead), Apple Valley omitted, 
 ### Flagged for cleanup (pre-existing, not a Rachel item)
 - email/v5 has DUPLICATE 23/24/25 files (two naming variants each, inherited from v4). Resolve when emails 23-25 are finalised with Rachel's data.
 - Email 09: Bloomington & Plymouth need a variant that keeps the Call Box photo (commented in 09; only the Blaine/generic set exists today).
+---
+
+## G. QA PASS 3 — full line-by-line audit vs pasted 6/18 notes (2026-06-24)
+
+- **Emails 23-25 "make concise" — DONE (was wrongly deferred).** The emails already contained the partner data (Square 2.45%, the four insurers, VistaPrint, PBA, Salon S.O.S.; SalonInteractive, Jack Winn Pro, Brazilian Professionals, KAO/Goldwell, Sam Villa, Minerva, MeyerSPA, Cricket, KELA, Leaf and Flower; Empower, Malden, Stride, Ally). Trimmed every verbose description to a one-line partner + offer. All partners retained (verified).
+- **Page titles bumped v4/JCE Media -> v5** on all 6 landing pages.
+- **Removed 3 orphaned duplicate email files** (23-member-resources-tools, 24-member-resources-partners, 25-member-resources-protection) that the viewer never referenced.
+
+### Remaining (genuinely needs Rachel, not buildable now)
+- Email 02: confirm HOW to pull booked tour day/time from Calendly into GHL (the {{tour_datetime}} field is wired and waiting).
+- "23-25 should be in the lease email sequence" — a GHL workflow placement, not an HTML change.
+- Email 09 Bloomington/Plymouth Call Box variant — only when per-location email sets are produced.
+- Internal note (security system varies by location) — intentionally NOT applied to emails, per Rachel's "do not update emails with this info".
