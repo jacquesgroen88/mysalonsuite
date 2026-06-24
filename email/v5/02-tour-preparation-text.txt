@@ -4,7 +4,7 @@ Hi {{name}},
 
 I'm looking forward to showing you around My Salon Suite Blaine! 
 
-Your tour is set for {{tour_datetime}}.
+Your tour is set for {{appointment.start_time}}.
 
 To make the most of our time together, here are a few quick details as you prepare for your visit:
 

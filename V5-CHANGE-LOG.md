@@ -151,3 +151,11 @@ Tattoo profession: Blaine omitted (microblading instead), Apple Valley omitted, 
 - "23-25 should be in the lease email sequence" — a GHL workflow placement, not an HTML change.
 - Email 09 Bloomington/Plymouth Call Box variant — only when per-location email sets are produced.
 - Internal note (security system varies by location) — intentionally NOT applied to emails, per Rachel's "do not update emails with this info".
+---
+
+## H. Calendar decision: GHL native (2026-06-24)
+
+Switched the tour-booking approach from Calendly to the GHL native calendar (system is GHL-native; pre-launch so zero migration cost).
+- **Email 01:** booking CTA now uses {{booking_link}} (the location/manager GHL calendar scheduling link) instead of {{calendly_url}}.
+- **Email 02:** tour day/time now uses the native {{appointment.start_time}} merge field instead of the placeholder {{tour_datetime}} -- **this CLOSES the open email 02 question** (the booked time auto-fills from the GHL appointment, no manual entry).
+- GHL setup to finish: create the two manager calendars (Stacey / Kayley), connect each to their Google Calendar (two-way sync) for real availability, set {{booking_link}} per location.
