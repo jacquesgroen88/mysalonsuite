@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V4 Final — My Salon Suite Email Sequence</title>
+    <title>V5 — My Salon Suite Email Sequence</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap');
 
@@ -136,6 +136,11 @@
             color: #FFFFFF;
         }
 
+        .badge.v5 {
+            background-color: #D97706;
+            color: #FFFFFF;
+        }
+
         .version-toggle {
             display: flex;
             gap: 0;
@@ -261,18 +266,151 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
-            <div class="version-badge">V4 Final</div>
+            <div class="version-badge">V5 Latest</div>
         </div>
 
         <div class="version-toggle">
-            <button id="btn-v1" onclick="showVersion('v1')">v1 Original</button>
-            <button id="btn-v2" onclick="showVersion('v2')">v2 Updated</button>
-            <button id="btn-v3" onclick="showVersion('v3')">v3 Revised</button>
-            <button class="active" id="btn-v4" onclick="showVersion('v4')">v4 Final</button>
+            <button id="btn-v1" onclick="showVersion('v1')">v1</button>
+            <button id="btn-v2" onclick="showVersion('v2')">v2</button>
+            <button id="btn-v3" onclick="showVersion('v3')">v3</button>
+            <button id="btn-v4" onclick="showVersion('v4')">v4</button>
+            <button class="active" id="btn-v5" onclick="showVersion('v5')">v5</button>
         </div>
 
+        <!-- V5 SECTION -->
+        <div class="v5-section" id="v5-section">
+            <div class="sidebar-title" style="color:#D97706;">Initial Tour Sequence</div>
+            <ul class="email-list">
+                <li class="email-item active" onclick="loadEmail('v5/01-tour-requested-html.html', this)">
+                    <span class="email-name">01. Tour Requested</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/02-tour-preparation-text.txt', this)">
+                    <span class="email-name">02. Tour Preparation</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/03-profit-visualization-html.html', this)">
+                    <span class="email-name">03. Profit Visualization</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/04-brand-freedom-text.txt', this)">
+                    <span class="email-name">04. Brand Freedom</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/05-lead-nurture-community-html.html', this)">
+                    <span class="email-name">05. Community Profile</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Guide Delivery Sequence</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/06-guide-delivery-html.html', this)">
+                    <span class="email-name">06. Guide Delivery</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/07-guide-followup-text.txt', this)">
+                    <span class="email-name">07. Casual Follow Up</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/08-guide-tour-push-html.html', this)">
+                    <span class="email-name">08. Tour Push</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Evergreen Sequence</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/09-evergreen-security-html.html', this)">
+                    <span class="email-name">09. Security Benefit</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/10-evergreen-decor-text.txt', this)">
+                    <span class="email-name">10. Custom Decor</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/11-evergreen-client-exp-html.html', this)">
+                    <span class="email-name">11. VIP Client Exp</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/12-evergreen-tax-benefits-text.txt', this)">
+                    <span class="email-name">12. Tax Benefits</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/16-evergreen-tech-stack-html.html', this)">
+                    <span class="email-name">16. Tech Stack</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/17-evergreen-education-text.txt', this)">
+                    <span class="email-name">17. Business Education</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/18-evergreen-all-pros-html.html', this)">
+                    <span class="email-name">18. All Professionals</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/19-evergreen-no-hidden-fees-text.txt', this)">
+                    <span class="email-name">19. No Hidden Fees</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/20-evergreen-quiz-html.html', this)">
+                    <span class="email-name">20. Top Funnel Quiz</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Member Business Resources</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/23-member-tools-savings-html.html', this)">
+                    <span class="email-name">23. Business Tools &amp; Savings</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/24-member-product-partners-html.html', this)">
+                    <span class="email-name">24. Product Partners &amp; Revenue</span>
+                    <span class="badge v5">v5</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/25-member-health-wellness-html.html', this)">
+                    <span class="email-name">25. Health, Wellness &amp; Protection</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Final Check-In</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/13-evergreen-final-push-html.html', this)">
+                    <span class="email-name">13. Final Check-In</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Community</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/26-community-html.html', this)">
+                    <span class="email-name">26. In Business for Yourself</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Reactivation Sequence</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/21-reactivation-timing-text.txt', this)">
+                    <span class="email-name">21. Better Timing</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/22-reactivation-whats-new-html.html', this)">
+                    <span class="email-name">22. What You Missed</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+            <div class="sidebar-title" style="color:#D97706;">Current Member Sequence</div>
+            <ul class="email-list">
+                <li class="email-item" onclick="loadEmail('v5/14-review-request-text.txt', this)">
+                    <span class="email-name">14. Check-In</span>
+                    <span class="badge text">TEXT</span>
+                </li>
+                <li class="email-item" onclick="loadEmail('v5/15-review-google-html.html', this)">
+                    <span class="email-name">15. Review Request</span>
+                    <span class="badge v5">v5</span>
+                </li>
+            </ul>
+        </div><!-- end v5-section -->
+
         <!-- V4 SECTION -->
-        <div class="v4-section" id="v4-section">
+        <div class="v4-section" id="v4-section" style="display:none;">
             <div class="sidebar-title" style="color:#3730A3;">Initial Tour Sequence</div>
             <ul class="email-list">
                 <li class="email-item active" onclick="loadEmail('v4/01-tour-requested-html.html', this)">
@@ -614,7 +752,7 @@
             </div>
         </div>
         <div class="iframe-container">
-            <iframe id="email-frame" src="v4/01-tour-requested-html.html" frameborder="0"></iframe>
+            <iframe id="email-frame" src="v5/01-tour-requested-html.html" frameborder="0"></iframe>
         </div>
     </div>
 
@@ -643,7 +781,7 @@
         }
 
         function showVersion(version) {
-            const versions = ['v1', 'v2', 'v3', 'v4'];
+            const versions = ['v1', 'v2', 'v3', 'v4', 'v5'];
             versions.forEach(function(v) {
                 const section = document.getElementById(v + '-section');
                 const btn = document.getElementById('btn-' + v);
