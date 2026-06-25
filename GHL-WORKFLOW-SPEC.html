@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHL Workflow Spec — My Salon Suite Lead & Member Contact Flow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap');
+  :root{ --ink:#080001; --navy:#14233A; --orange:#F15A29; --teal:#0D9488; --muted:#5A6678; --line:#E4E8EE; --cream:#FAFAFB; }
+  *{ box-sizing:border-box; }
+  body{ font-family:'Jost',sans-serif; color:var(--ink); line-height:1.6; margin:0; background:#EEF1F5; }
+  .wrap{ max-width:960px; margin:28px auto; background:#fff; box-shadow:0 8px 30px rgba(20,35,58,.08); }
+  header{ background:var(--ink); color:#fff; padding:40px 48px; }
+  header .kick{ color:var(--orange); text-transform:uppercase; letter-spacing:3px; font-size:12px; font-weight:700; }
+  header h1{ font-family:'Playfair Display',serif; font-size:30px; margin:6px 0 8px; }
+  header p{ color:#B9C2D0; margin:0; font-size:14px; }
+  .body{ padding:40px 48px; }
+  h2{ font-family:'Playfair Display',serif; font-size:22px; margin:38px 0 6px; }
+  h3{ font-size:16px; margin:24px 0 6px; color:var(--navy); }
+  .lead{ color:var(--muted); font-size:14px; margin:0 0 10px; }
+  table{ border-collapse:collapse; width:100%; margin:12px 0 8px; font-size:13.5px; }
+  th,td{ border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top; }
+  th{ background:var(--cream); font-weight:600; }
+  code{ background:#F2F4F8; padding:1px 6px; border-radius:4px; font-size:12.5px; color:var(--navy); }
+  .badge{ display:inline-block; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; padding:2px 8px; border-radius:20px; color:#fff; }
+  .b-built{ background:#2E7D32; }
+  .b-add{ background:var(--teal); }
+  .b-team{ background:#C2410C; }
+  .b-q{ background:#9333EA; }
+  .wf{ border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:8px; padding:18px 22px; margin:14px 0; background:#FffDfb; }
+  .wf h3{ margin-top:0; color:var(--orange); }
+  .note{ background:#FFF6E9; border-left:3px solid var(--orange); padding:8px 12px; border-radius:4px; font-size:13px; color:#7A5417; margin:8px 0; }
+  .legend span{ margin-right:14px; font-size:13px; }
+  ul{ margin:6px 0; padding-left:20px; } li{ margin-bottom:4px; font-size:14px; }
+  .sms{ background:#F2FBFA; border:1px solid #B9E5E0; border-radius:6px; padding:12px 14px; margin:8px 0; font-size:13.5px; }
+  .sms b{ color:var(--teal); }
+  @media print{ body{ background:#fff; } .wrap{ box-shadow:none; margin:0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kick">Build Specification</div>
+  <h1>Lead &amp; Member Contact Flow — GHL Workflows</h1>
+  <p>My Salon Suite Minnesota &bull; Source: Rachel's 6/22 flowchart + v5 email set &bull; Prepared 2026-06-25</p>
+</header>
+<div class="body">
+
+  <p class="lead">This spec turns Rachel's contact-flow chart into build-ready GoHighLevel workflows. Each node lists its trigger, timing, action, and conditions. Status badges show what is already built versus still to add.</p>
+  <p class="legend">
+    <span class="badge b-built">BUILT</span> email already exists (v5)
+    <span class="badge b-add">TO ADD</span> still to create
+    <span class="badge b-team">TEAM</span> manual action by Stacey/Kayley
+    <span class="badge b-q">CLARIFY</span> question for Rachel
+  </p>
+
+  <h2>1. Prerequisites (must exist before workflows run)</h2>
+  <table>
+    <tr><th>Item</th><th>Why</th><th>Status</th></tr>
+    <tr><td>Landing-page form wired to GHL (inbound webhook)</td><td>Creates the contact and fires the Tour Sequence. Nothing starts without it.</td><td><span class="badge b-add">TO DO</span></td></tr>
+    <tr><td>GHL calendars per manager (Stacey, Kayley) + Google Calendar two-way sync</td><td>Captures tour date/time natively and respects real availability.</td><td><span class="badge b-add">TO DO</span></td></tr>
+    <tr><td>Custom fields, custom values, tags (section 2)</td><td>Merge fields and branch conditions depend on them.</td><td><span class="badge b-add">TO DO</span></td></tr>
+    <tr><td><code>lease-signed</code> trigger (tag or pipeline stage)</td><td>Starts the Member workflows.</td><td><span class="badge b-add">TO DO</span></td></tr>
+    <tr><td>Email templates uploaded to GHL</td><td>The v5 emails become sendable template steps.</td><td><span class="badge b-add">TO DO</span></td></tr>
+    <tr><td>Number porting / call forwarding (RingCentral)</td><td>Only for the Call Bridge step. Not a blocker for email/SMS.</td><td><span class="badge b-team">RACHEL/DIANE</span></td></tr>
+  </table>
+
+  <h2>2. Data layer</h2>
+  <h3>Merge fields used across emails &amp; SMS</h3>
+  <table>
+    <tr><th>Field</th><th>Source</th></tr>
+    <tr><td><code>{{contact.first_name}}</code>, <code>{{contact.phone}}</code>, <code>{{contact.email}}</code></td><td>Form</td></tr>
+    <tr><td><code>{{preferred_time}}</code></td><td>Form (tour window)</td></tr>
+    <tr><td><code>{{appointment.start_time}}</code></td><td>GHL calendar (auto, replaces the old tour_datetime question)</td></tr>
+    <tr><td><code>{{booking_link}}</code></td><td>Per-location GHL calendar scheduling link</td></tr>
+    <tr><td><code>{{location_name}}</code>, <code>{{location_address}}</code>, <code>{{facebook_url}}</code></td><td>Per-location custom value</td></tr>
+    <tr><td><code>{{manager_name}}</code>, <code>{{manager_phone}}</code>, <code>{{manager_email}}</code>, <code>{{manager_photo_url}}</code></td><td>Per-location custom value (Stacey or Kayley)</td></tr>
+    <tr><td><code>{{guide_link}}</code> (= profit calculator), <code>{{google_review_link}}</code></td><td>Custom value</td></tr>
+    <tr><td><code>{{lobby_photo_url}}</code>, <code>{{security_photo_url}}</code>, <code>{{member_spotlight_*}}</code></td><td>Per-location image custom values (multi-location only)</td></tr>
+  </table>
+  <h3>Tags / pipeline stages (drive the branches)</h3>
+  <p style="font-size:14px;"><code>lead-new</code> &bull; <code>tour-booked</code> &bull; <code>tour-no-show</code> &bull; <code>tour-cancelled</code> &bull; <code>toured-no-reservation</code> &bull; <code>toured-reservation</code> &bull; <code>lease-signed</code> (member) &bull; <code>location: {Blaine | Apple Valley | Bloomington | Chanhassen | Plymouth | Rogers}</code> &bull; <code>availability: {Open | Full}</code> (per location, for the waitlist rule)</p>
+
+  <h2>3. Workflows</h2>
+
+  <div class="wf">
+    <h3>Workflow A — Lead: Tour Request &amp; Confirmation</h3>
+    <p class="lead"><b>Trigger:</b> Tour Request form submitted (contact created). Set tag <code>lead-new</code> + <code>location</code>.</p>
+    <table>
+      <tr><th>Step</th><th>Timing</th><th>Action</th><th>Status</th></tr>
+      <tr><td>Text #1 — Tour Confirmation (SMS)</td><td>Immediate</td><td>SMS "got your request" (see section 4)</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email #1 — Tour Requested</td><td>Immediate</td><td>Send <code>01-tour-requested</code> (has the GHL booking button)</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Call Bridge</td><td>Immediate / ~50 min</td><td>Connect lead to manager or notify manager to call</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email #2 — Tour Preparation</td><td>On booking (or 24h before tour)</td><td>Send <code>02-tour-preparation</code>; day/time auto-fills via <code>{{appointment.start_time}}</code></td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Text #2 — Reminder (SMS)</td><td>If tour after 12pm: 9am same day. If before 12pm: 6pm night before.</td><td>SMS reminder w/ time + address</td><td><span class="badge b-add">TO ADD</span></td></tr>
+    </table>
+    <div class="note"><b>Branch after tour date</b> (on GHL appointment status):
+      <br>&bull; <b>No Show</b> &rarr; Text #2a &rarr; Workflow B
+      <br>&bull; <b>Cancelled</b> &rarr; Text #2a &rarr; Workflow B
+      <br>&bull; <b>Toured, No Reservation</b> &rarr; Text #2b &rarr; <span class="badge b-team">TEAM</span> manager follow-up &rarr; Workflow B
+      <br>&bull; <b>Toured, Reservation</b> &rarr; <span class="badge b-team">TEAM</span> manager follow-up &rarr; Workflow C (Member)
+    </div>
+  </div>
+
+  <div class="wf">
+    <h3>Workflow B — Lead: Nurture, Evergreen &amp; Reactivation</h3>
+    <p class="lead"><b>Entry:</b> No-Show, Cancelled, or Toured-No-Reservation. <b>Timing anchor:</b> initial tour date. <b>Exit:</b> if the lead reserves at any point, stop and move to Workflow C.</p>
+    <table>
+      <tr><th>Phase</th><th>Day offset (from tour date, tunable)</th><th>Emails</th><th>Status</th></tr>
+      <tr><td>Nurture</td><td>~Day 7, 9, 11</td><td>#3 Profit Visualization, #4 Brand Freedom, #5 Community</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td rowspan="4">Evergreen (14 emails over ~12 weeks, ~every 5-6 days)</td><td>Day 14, 20, 26, 32</td><td>#23 Tools, #24 Partners, #25 Wellness, #26 Community</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Day 38, 44, 50, 56</td><td>#9 Security, #10 Decor, #11 VIP, #12 Tax</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Day 62, 68, 74, 80, 86</td><td>#16 Tech, #17 Education, #18 All Pros, #19 No Fees, #20 Quiz</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Day 92</td><td>#13 Final Check-In</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Reactivation</td><td>4 months / 5 months after tour</td><td>#21 Better Timing, #22 What You Missed</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Ongoing</td><td>Monthly</td><td>Lead Monthly Newsletter</td><td><span class="badge b-add">TO ADD</span></td></tr>
+    </table>
+    <div class="note">Waitlist rule: if the lead's <code>location</code> is <code>availability: Full</code>, pause the reservation-driving emails and send the waitlist variant instead (ends with "join our waitlist"). <span class="badge b-add">TO ADD</span></div>
+  </div>
+
+  <div class="wf">
+    <h3>Workflow C — Member: Onboarding</h3>
+    <p class="lead"><b>Trigger:</b> tag <code>lease-signed</code> (Toured-Reservation path). <b>Anchor:</b> lease/move-in date.</p>
+    <table>
+      <tr><th>Step</th><th>Timing</th><th>Action</th><th>Status</th></tr>
+      <tr><td>Manager follow-up</td><td>Immediate</td><td>Personal text + email from manager</td><td><span class="badge b-team">TEAM</span></td></tr>
+      <tr><td>Email — Application</td><td>Immediate</td><td>Application link email <span class="badge b-q">CLARIFY</span> (does a template exist, or new?)</td><td><span class="badge b-q">CLARIFY</span></td></tr>
+      <tr><td>Email #00 — Member Onboarding</td><td>On lease signed</td><td>Send <code>00-member-onboarding</code></td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Email — Site Leader Introduction</td><td>~Day 2-3</td><td>Per-location site-leader intro (like the #26 Jennifer spotlight, member-context)</td><td><span class="badge b-add">TO ADD</span></td></tr>
+    </table>
+  </div>
+
+  <div class="wf">
+    <h3>Workflow D — Member: Check-ins &amp; Benefits Review</h3>
+    <p class="lead"><b>Anchor:</b> move-in date.</p>
+    <table>
+      <tr><th>Step</th><th>Timing</th><th>Action</th><th>Status</th></tr>
+      <tr><td>Text #3 — Check-In (SMS)</td><td>1 week post move-in</td><td>Short casual check-in SMS</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email #14 — Check-In</td><td>4 weeks post move-in</td><td>Send <code>14-check-in</code> (subject "Checking In!")</td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Email — Website Directory Listing</td><td>6 weeks</td><td>Add member to site directory</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email — Square Discount</td><td>8 weeks</td><td>Member Square benefit (content exists in #23; trim to a single-benefit member email)</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email — Google Business</td><td>10 weeks</td><td>Help member set up Google Business profile</td><td><span class="badge b-add">TO ADD</span></td></tr>
+      <tr><td>Email #15 — Review Request</td><td>12 weeks post move-in</td><td>Send <code>15-review-request</code></td><td><span class="badge b-built">BUILT</span></td></tr>
+      <tr><td>Ongoing</td><td>Monthly</td><td>Member Monthly Newsletter</td><td><span class="badge b-add">TO ADD</span></td></tr>
+    </table>
+  </div>
+
+  <h2>4. SMS copy to write (drafts for Rachel's approval)</h2>
+  <div class="sms"><b>Text #1 — Tour Confirmation (immediate):</b> "Hi {{contact.first_name}}, it's {{manager_name}} at My Salon Suite {{location_name}}. Got your tour request! I'll reach out shortly to lock in your time. Talk soon."</div>
+  <div class="sms"><b>Text #2 — Reminder (timed before tour):</b> "Hi {{contact.first_name}}, quick reminder: your My Salon Suite {{location_name}} tour is {{appointment.start_time}}. We're at {{location_address}}. See you there! Reply if anything changes."</div>
+  <div class="sms"><b>Text #2a — No-show / Cancelled:</b> "Hi {{contact.first_name}}, sorry we missed you! No problem at all. Want to grab a new time? Book here: {{booking_link}}"</div>
+  <div class="sms"><b>Text #2b — Toured, no reservation:</b> "Hi {{contact.first_name}}, great meeting you at My Salon Suite {{location_name}}! Any questions about your suite or next steps? I'm here whenever you're ready to hold your spot."</div>
+  <div class="sms"><b>Text #3 — Member check-in (1 week post move-in):</b> "Hi {{contact.first_name}}, {{manager_name}} here. You've been in your suite a week! How is it going? Anything you need, just reply."</div>
+
+  <h2>5. Build status summary</h2>
+  <table>
+    <tr><th>Category</th><th>Built (v5)</th><th>Still to add</th></tr>
+    <tr><td>Lead emails</td><td>01-05, 09-13, 16-26 (21 emails)</td><td>Lead monthly newsletter, waitlist variant</td></tr>
+    <tr><td>Member emails</td><td>00, 14, 15</td><td>Application (clarify), Site Leader Intro, Website Directory, Square Discount, Google Business, Member newsletter</td></tr>
+    <tr><td>SMS</td><td>none</td><td>Text #1, #2, #2a, #2b, #3 (drafts above)</td></tr>
+    <tr><td>Other</td><td>-</td><td>Call bridge, 4 tour-outcome branches, all timing/wait steps</td></tr>
+  </table>
+
+  <h2>6. Open questions for Rachel</h2>
+  <ul>
+    <li><span class="badge b-q">CLARIFY</span> <b>Emails #23-26 placement:</b> the chart puts them in the lead evergreen, but your 6/18 note said the member/lease sequence. The member side also has separate Square Discount / Directory / Google Business emails. Confirm: detailed partner emails (#23-26) nurture leads, simpler benefit emails for members?</li>
+    <li><span class="badge b-q">CLARIFY</span> <b>"Email (Application)":</b> does a template already exist, or is this new? And the link your team adds, is it the same per location or per manager?</li>
+    <li><b>Member spotlights</b> (Site Leader Intro) for Plymouth, Rogers, Blaine: need names, quotes, photos (Chanhassen, Bloomington, Apple Valley already supplied).</li>
+    <li><b>Launch scope:</b> Blaine pilot first, or all 6 locations together? Decides whether we templatize the emails now.</li>
+    <li><b>Tour day/time question (asked 3x on the chart): SOLVED.</b> The GHL calendar provides it via <code>{{appointment.start_time}}</code>; no manual entry.</li>
+  </ul>
+
+</div>
+</div>
+</body>
+</html>
