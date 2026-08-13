@@ -510,32 +510,11 @@
                 <h2>Secure Your Private Tour Today.</h2>
                 <p>Availability in our Blaine location is highly limited. Fill out the form to view the remaining suites before they are completely filled.</p>
             </div>
-            <div>
-                <form id="ghl-form" class="luxury-form" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required placeholder="First and Last Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Direct Phone Number</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" required placeholder="(xxx) xxx-xxxx">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Professional Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required placeholder="you@brand.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="preferred_time">Requested Tour Time</label>
-                        <select id="preferred_time" name="preferred_time" class="form-control" required>
-                            <option value="" disabled selected>Tap to select...</option>
-                            <option value="Morning">Morning (9AM - 12PM)</option>
-                            <option value="Afternoon">Afternoon (12PM - 4PM)</option>
-                            <option value="Evening">Evening (4PM - 7PM)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-primary form-submit-btn">Request VIP Tour</button>
-                    <span class="form-guarantee">Your details are strictly confidential. No obligations.</span>
-                </form>
+            <div class="booking-embed">
+                <iframe src="https://api.leadconnectorhq.com/widget/booking/8jAyUAwUQ8e0RKEd3548"
+                        style="width:100%;border:none;overflow:hidden;min-height:720px;border-radius:12px;background:#fff;"
+                        scrolling="no" id="8jAyUAwUQ8e0RKEd3548_embed" title="Book your My Salon Suite Blaine tour"></iframe>
+                <span class="form-guarantee">Pick a time that suits you. Your details are strictly confidential. No obligations.</span>
             </div>
         </div>
     </section>
@@ -584,20 +563,7 @@
         }
     </script>
 
-    <!-- Form handler -->
-    <script>
-        document.getElementById('ghl-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const payload = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                preferred_time: document.getElementById('preferred_time').value
-            };
-            console.log('GHL payload:', payload);
-            alert('Tour Booked! (GoHighLevel Intercept Connected)');
-            this.reset();
-        });
-    </script>
+    <!-- GHL calendar booking widget (auto-resizes the iframe above) -->
+    <script src="https://api.leadconnectorhq.com/js/form_embed.js" type="text/javascript"></script>
 </body>
 </html>
