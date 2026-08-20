@@ -1,0 +1,14 @@
+# The Blaine landing page owns the site root.
+#
+# blaine.mysalonsuite.com points at this site, so "/" must serve the live v5
+# page (real booking widget), not the frozen v1 index.html.
+#
+# The "!" force flag is required: Netlify skips a rule when a real file already
+# matches the path, and index.html exists here. Without it this rule is ignored.
+#
+# v1-v4 stay reachable at their own paths for the client comparison:
+#   /index.html            v1 (frozen)
+#   /index-v2.html         v2
+#   /index-blaine-v5.html  v5 (same page the root now serves)
+
+/    /index-blaine-v5.html    200!
