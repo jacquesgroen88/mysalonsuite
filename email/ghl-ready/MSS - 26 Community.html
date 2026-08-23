@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Business For Yourself, Not By Yourself - My Salon Suite Blaine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+        body { font-family: 'Jost', Helvetica, Arial, sans-serif; background-color: #FAFAFB; margin: 0; padding: 0; color: #080001; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #FFFFFF; }
+        .top-bar { background-color: #F9E3B2; padding: 10px; text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: #080001; }
+        .header { background-color: #FFFFFF; padding: 30px; text-align: center; border-bottom: 1px solid #EEEEEE; }
+        .header img { height: 35px; }
+        .hero-banner { width: 100%; height: 240px; background-image: url('https://mysalonsuite.netlify.app/blaine-photos/Group - Hallway.JPG'); background-size: cover; background-position: center; position: relative; }
+        .site-leader-block { display: flex; align-items: center; gap: 20px; background-color: #FAFAFB; border-radius: 6px; padding: 24px; margin: 30px 0; border: 1px solid #EEEEEE; }
+        .site-leader-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .site-leader-info strong { font-size: 16px; color: #080001; display: block; margin-bottom: 4px; }
+        .site-leader-info span { font-size: 12px; color: #F15A29; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px; }
+        .site-leader-info p { margin: 0; font-size: 14px; color: #666666; line-height: 1.5; }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(8, 0, 1, 0.4); }
+        .hero-text { position: relative; z-index: 2; padding: 80px 40px; text-align: center; color: #FFFFFF; }
+        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 0; font-style: italic; }
+        .content { padding: 50px 40px; }
+        .content h2 { font-size: 14px; margin-bottom: 20px; color: #F15A29; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        .content p { font-size: 16px; line-height: 1.8; margin-bottom: 25px; color: #444444; }
+        .highlight-box { background-color: #F9E3B2; border-radius: 6px; padding: 26px 30px; margin: 30px 0; }
+        .highlight-box p { margin: 0; font-size: 16px; line-height: 1.7; color: #080001; font-weight: 600; }
+        .btn-wrapper { text-align: center; margin: 40px 0; }
+        .btn { display: inline-block; background-color: #F15A29; color: #FFFFFF; text-decoration: none; padding: 18px 45px; border-radius: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; }
+        .footer { background-color: #FAFAFB; padding: 50px 40px; text-align: center; color: #080001; border-top: 1px solid #EEEEEE; }
+        .footer img { height: 30px; margin-bottom: 30px; }
+        .footer p { font-size: 12px; line-height: 1.6; color: #666666; margin: 5px 0; }
+        /* 6/18: mobile — center the words on the main picture */
+        @media (max-width: 480px) {
+            .hero-banner { display: flex; align-items: center; justify-content: center; }
+            .hero-text { padding: 30px 24px; width: 100%; box-sizing: border-box; }
+            .hero-text h1 { font-size: 24px; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">Welcome To The Community</div>
+        <div class="header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        </div>
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-text">
+                <h1>In business for yourself,<br>not by yourself.</h1>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>You're Never Alone</h2>
+            <p>Hi {{contact.first_name}},</p>
+            <p>Going independent is exciting, and one of the best parts is that you do not have to do it alone. When you join My Salon Suite, you join a community.</p>
+
+            <div class="highlight-box">
+                <p>You're in business for yourself, but not by yourself.</p>
+            </div>
+
+            <p>We host events both at your individual location and across all of our Twin Cities locations, giving you opportunities to connect, collaborate, and build relationships with other beauty professionals.</p>
+
+            <p>Each location also has a Site Leader: a fellow member who can be a great resource for questions, advice, and support as you grow your business. They have been where you are, and they are right down the hall.</p>
+
+            <div class="site-leader-block">
+                <img src="https://mysalonsuite.netlify.app/blaine-photos/Jennifer.png" alt="Jennifer" class="site-leader-photo">
+                <div class="site-leader-info">
+                    <strong>Jennifer</strong>
+                    <span>Site Leader &bull; Cosmetologist</span>
+                    <p>Member since 2025. Jennifer made the leap from a commission salon and has never looked back. She is right down the hall.</p>
+                </div>
+            </div>
+
+            <p>Come see the community for yourself. We would love to introduce you!</p>
+
+            <div class="btn-wrapper">
+                <a href="https://mysalonsuiteblaine.com/#book-tour" class="btn">Meet The Community</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <p><strong>My Salon Suite - Blaine</strong></p>
+            <p>Prime Location &bull; Luxury Environment &bull; Total Independence</p>
+            <p style="font-size:11px;color:#666666;margin:14px 0 5px 0;"><a href="https://www.facebook.com/mysalonsuiteblaine" style="color:#F15A29;text-decoration:none;font-weight:600;">Facebook</a> &nbsp;|&nbsp; <a href="https://www.instagram.com/mysalonsuite_mn/" style="color:#F15A29;text-decoration:none;font-weight:600;">Instagram</a></p>
+            <p style="margin-top: 30px; font-size: 10px; opacity: 0.4;">&copy; 2026 My Salon Suite. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
+

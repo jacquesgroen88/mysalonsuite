@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Your Business For Less - My Salon Suite Blaine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,500&display=swap');
+
+        body {
+            font-family: 'Jost', Helvetica, Arial, sans-serif;
+            background-color: #FAFAFB;
+            margin: 0;
+            padding: 0;
+            color: #080001;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+        }
+
+        .top-bar {
+            background-color: #F9E3B2;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: #080001;
+        }
+
+        .header {
+            background-color: #FFFFFF;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .header img {
+            height: 35px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        .hero-banner {
+            width: 100%;
+            height: 250px;
+            background-color: #FAFAFB;
+            background-image: url('https://mysalonsuite.netlify.app/blaine-photos/Client Lounge.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #F15A29;
+            margin-bottom: 25px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #444444;
+        }
+
+        .benefit-list {
+            background-color: #FAFAFB;
+            padding: 30px;
+            border-radius: 4px;
+            border-left: 4px solid #F15A29;
+            margin-bottom: 30px;
+        }
+
+        .benefit-item {
+            margin-bottom: 20px;
+        }
+
+        .benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .benefit-item h4 {
+            margin: 0 0 6px 0;
+            color: #080001;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .benefit-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #444444;
+            line-height: 1.6;
+        }
+
+        .btn-wrapper {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #F15A29;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .footer {
+            background-color: #FAFAFB;
+            padding: 50px 40px;
+            text-align: center;
+            color: #080001;
+            border-top: 1px solid #EEEEEE;
+        }
+
+        .footer img {
+            height: 30px;
+            width: auto;
+            max-width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .footer p {
+            font-size: 11px;
+            color: #666666;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar">Member Pricing That Adds Up</div>
+        <div class="header">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+        </div>
+        <div class="hero-banner"></div>
+        <div class="content">
+            <h1>Run Your Business For Less.</h1>
+            <p>Hi {{contact.first_name}},</p>
+            <p>When you join My Salon Suite, you are not just renting a beautiful private suite. You are joining a community with negotiated member pricing on the tools every salon business runs on. Here is what that looks like:</p>
+
+            <div class="benefit-list">
+                <div class="benefit-item">
+                    <h4>Keep More of Every Payment</h4>
+                    <p><strong>Square:</strong> a flat 2.45% card-present rate (vs 2.6% + 10c) and Square Plus at half off ($25/mo), with online booking, reminders, deposits, and loyalty built in.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Protect Your License and Career</h4>
+                    <p><strong>Insurance, four providers:</strong> Beauty and Bodywork Insurance ($9.99/mo), Gild Studio Policy ($250/yr), Associated Professionals ($149/yr), Elite Beauty Society ($110/yr).</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Look Professional From Day One</h4>
+                    <p><strong>VistaPrint:</strong> year-round member promotions plus a My Salon Suite branded-gear section.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Invest in Yourself</h4>
+                    <p><strong>Professional Beauty Association:</strong> $50 off membership, plus scholarships year-round.</p>
+                </div>
+                <div class="benefit-item">
+                    <h4>Get Found Online</h4>
+                    <p><strong>Salon S.O.S.:</strong> affordable digital marketing built specifically for salons and spas.</p>
+                </div>
+            </div>
+
+            <p>These are the kinds of savings that quietly add up to thousands a year. Want to see what your numbers would look like in a suite?</p>
+
+            <div class="btn-wrapper">
+                <a href="https://mysalonsuiteblaine.com/#book-tour" class="btn">Book Your Tour</a>
+            </div>
+        </div>
+        <div class="footer">
+            <img src="https://www.mysalonsuite.com/wp-content/uploads/2025/06/logo-small.svg" alt="My Salon Suite">
+            <p style="font-size:11px;color:#666666;margin:14px 0 5px 0;"><a href="https://www.facebook.com/mysalonsuiteblaine" style="color:#F15A29;text-decoration:none;font-weight:600;">Facebook</a> &nbsp;|&nbsp; <a href="https://www.instagram.com/mysalonsuite_mn/" style="color:#F15A29;text-decoration:none;font-weight:600;">Instagram</a></p>
+            <p>&copy; 2026 My Salon Suite - Blaine. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
+
